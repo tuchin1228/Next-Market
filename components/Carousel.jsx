@@ -38,7 +38,7 @@ export default function Carousel() {
     autoplay: true,
   };
   return (
-    <div className="relative mt-20 -mb-2 z-10">
+    <div className="relative mt-24 -mb-2 z-10 overflow-x-hidden">
       {WindowWidth > 768 ? (
         // 桌機版
         <Slider {...settings}>
@@ -46,7 +46,7 @@ export default function Carousel() {
             carousels.map((item) => {
               if (item.size == 0) {
                 return (
-                  <div key={item.id}>
+                  <div key={item.id}  className="relative">
                     <a href={item.url} target="_blank" rel="noreferrer">
                       <img className="w-full"
                         src={
@@ -55,6 +55,10 @@ export default function Carousel() {
                         alt=""
                       />
                     </a>
+                    
+                    {/* <h3 className="text-8xl text-white  absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        {item.title}
+                      </h3> */}
                   </div>
                 );
               }
