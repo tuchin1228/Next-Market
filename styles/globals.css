@@ -35,6 +35,7 @@ body {
 main {
   position: relative;
 }
+
 .shap1 {
   position: absolute;
   top: 0;
@@ -75,7 +76,7 @@ main {
 
 .shap5 {
   position: absolute;
-  bottom:  0;
+  bottom: 0;
   left: 0;
   transform: translateY(100%);
   width: 100%;
@@ -92,4 +93,34 @@ main {
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+
+.editorInner h1 {
+  font-size: 2em;
+}
+
+.editorInner h2 {
+  font-size: 1.5em;
+}
+
+.editorInner h3 {
+  font-size: 1.17em;
+}
+
+.editorInner h4 {
+  font-size: 1em;
+}
+
+.editorInner h5 {
+  font-size: 0.83em;
+}
+
+.editorInner h5 {
+  font-size: 0.67em;
+}
+
+.editorInner {
+  width: auto;
+  max-width: 100%;
 }

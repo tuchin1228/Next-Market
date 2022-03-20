@@ -11,26 +11,16 @@ import { faMapMarkerAlt, faPhone, faStoreAlt, faAngleRight } from '@fortawesome/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export async function getServerSideProps() {
+  
   let NewsRes = await axios.get(`${process.env.API_URL}/News/GetTwoNews`);
   let AboutRes = await axios.get(`${process.env.API_URL}/About/showHomeAbout`);
 
-
-  // if (res.data.success) {
-  //   setNews(res.data.news);
-  // }
 
   return { props: { news: NewsRes.data.news, about: AboutRes.data.about } }
 }
 
 
 export default function Home({ news, about }) {
-  // const [news, setNews] = useState([]);
-  // const [about, setAbout] = useState([]);
-
-  useEffect(() => {
-    // GetTwoNews();
-    // GetShowHomeAbout();
-  }, []);
 
   const FilterDate = (date) => {
     // return date;
@@ -39,23 +29,6 @@ export default function Home({ news, about }) {
       } / ${d.getDate() > 9 ? d.getDate() : "0" + d.getDate()}`;
   };
 
-  //取得最新消息
-  const GetTwoNews = async () => {
-    let res = await axios.get(`${process.env.API_URL}/News/GetTwoNews`);
-    console.log(res);
-    if (res.data.success) {
-      setNews(res.data.news);
-    }
-  };
-
-  //取得關於我們
-  const GetShowHomeAbout = async () => {
-    let res = await axios.get(`${process.env.API_URL}/About/showHomeAbout`);
-    console.log(res);
-    if (res.data.success) {
-      setAbout(res.data.about);
-    }
-  };
 
 
   return (
@@ -64,16 +37,13 @@ export default function Home({ news, about }) {
 
       <Carousel />
 
-
-
-
       <div className="about ">
         {
           about.map((item, idx) => (
             <div key={item.id} className=" relative pt-36 pb-16  " style={idx == 0 ? {
               background:
                 // "linear-gradient(0deg, #563006 0%, rgb(163 124 75) 48%, #563006 100%);"
-                "linear-gradient(0deg, #ffe8b5 0%, white 48%, #ffe8b5 100%)"
+                "linear-gradient(0deg, #ffe8b5 0%, #fff 48%, #ffe8b5 100%)"
             } : {}}>
               <div className="w-11/12 md:max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center ">
                 <div className={idx % 2 == 0 ? 'order-2 md:order-1 px-5 md:px-10' : 'order-2 md:order-2 px-5 md:px-10'} >
@@ -109,9 +79,9 @@ export default function Home({ news, about }) {
       <div
         className="relative py-10 min-h-500 px-5 md:px-0"
         style={{
+
           background:
-            "linear-gradient(0deg, #ffe8b5 0%, white 48%, #ffe8b5 100%);"
-          // "linear-gradient(0deg, rgba(255,253,232,1) 0%, rgba(255,237,174,1) 48%, rgba(255,253,232,1) 100%)",
+            "linear-gradient(0deg, #ffe8b5 0%, #fff 48%, #ffe8b5 100%)"
         }}
       >
 
@@ -137,21 +107,25 @@ export default function Home({ news, about }) {
                   <h3 className="w-fit px-2 py-1 rounded text-white text-2xl bg-yellow-900 absolute top-0 left-0  z-20 transform -translate-x-1/4 -translate-y-1/3 ">
                     {item.articles_cate_title}
                   </h3>
-                  <img
-                    className="rounded-t-xl w-full mx-auto hover:brightness-105 transition duration-150"
-                    src={
-                      process.env.Image_URL +
-                      "/news/" +
-                      item.article_id +
-                      "/" +
-                      item.banner
-                    }
-                    alt=""
-                  />
+                  <Link href={`/news/${item.cateId}/${item.article_id}`}>
+                    <img
+                      className="rounded-t-xl w-full mx-auto hover:brightness-105 transition duration-150"
+                      src={
+                        process.env.Image_URL +
+                        "/news/" +
+                        item.article_id +
+                        "/" +
+                        item.banner
+                      }
+                      alt=""
+                    />
+                  </Link>
                   <div className="  relative  mx-auto  py-2 px-5 bg-white rounded-b-lg">
-                    <h2 className="text-2xl font-medium tracking-wide text-yellow-900 ">
-                      {item.title}
-                    </h2>
+                    <Link href={`/news/${item.cateId}/${item.article_id}`}>
+                      <a className="text-2xl font-medium tracking-wide text-yellow-900 hover:text-yellow-700">
+                        {item.title}
+                      </a>
+                    </Link>
                     {/* <p
                       className="twoLine my-1 text-sm text-gray-500 tracking-wider"
                       dangerouslySetInnerHTML={{ __html: item.content }}

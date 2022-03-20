@@ -32,7 +32,7 @@ export default function news({ news, categories }) {
                         <Link href={'news'}><a className='px-12 py-2 bg-yellow-900 hover:bg-yellow-900 transition-all duration-200 text-white text-lg mx-3 rounded-full tracking-widest'>所有公告</a></Link>
                         {
                             categories.map(item => {
-                                return <Link href={'news/'+item.id}  key={item.id}><a className='px-12 py-2 bg-gray-300 hover:bg-yellow-900 transition-all duration-200 text-white text-lg mx-3 rounded-full tracking-widest'>{item.articles_cate_title}</a></Link>
+                                return <Link href={'news/' + item.id} key={item.id}><a className='px-12 py-2 bg-gray-300 hover:bg-yellow-900 transition-all duration-200 text-white text-lg mx-3 rounded-full tracking-widest'>{item.articles_cate_title}</a></Link>
                             })
                         }
                     </div>
@@ -41,11 +41,15 @@ export default function news({ news, categories }) {
                             news.map(item => {
                                 return <div key={item.article_id}>
                                     <div className='overflow-hidden rounded-lg my-2'>
-                                        <img className='rounded-lg  transition-all duration-200 transform scale-100 hover:scale-110' src={process.env.Image_URL +
-                                            "/news/" + item.article_id + '/' + item.banner} alt="" />
+                                        <Link href={`/news/${item.cateId}/${item.article_id}`}>
+                                            <img className='rounded-lg  transition-all duration-200 transform scale-100 hover:scale-110' src={process.env.Image_URL +
+                                                "/news/" + item.article_id + '/' + item.banner} alt="" />
+                                        </Link>
                                     </div>
-                                    <a href='' className='my-1 font-medium text-yellow-900 text-lg'>【{item.articles_cate_title}】</a>
-                                    <h2 className='my-1 font-normal text-gray-500 hover:text-yellow-900 tracking-wider text-xl '>{item.title}</h2>
+                                    <h3 className='my-1 font-medium text-yellow-900 text-lg'>【{item.articles_cate_title}】</h3>
+                                    <Link href={`/news/${item.cateId}/${item.article_id}`}>
+                                        <a className='my-1 font-normal text-gray-500 hover:text-yellow-900 tracking-wider text-xl '>{item.title}</a>
+                                    </Link>
                                     <p className=' text-gray-300 mt-4 text-lg'>{FilterDate(item.created_at)}</p>
                                 </div>
                             })

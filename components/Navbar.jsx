@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Logo from "../asset/image/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faClipboardList } from '@fortawesome/free-solid-svg-icons'
@@ -8,10 +9,12 @@ export default function Navbar() {
     <>
       <div className=" bg-white shadow fixed top-0 w-full left-0 z-50 ">
         <div className="container  py-5 mx-auto flex items-center justify-between">
-          <div className="mt-2" style={{ maxWidth: '200px' }}>
-            <Image src={Logo} alt="Logo" />
-            {/* <img src="" alt="" /> */}
-          </div>
+          <Link href={'/'}>
+            <a className="mt-2" style={{ maxWidth: '200px' }}>
+              <Image src={Logo} alt="Logo" />
+              {/* <img src="" alt="" /> */}
+            </a>
+          </Link>
           <div>
             {/* <ul className="flex items-center justify-end">
               <li className="text-lg  py-1 px-3 text-gray-700">購物車</li>
@@ -19,10 +22,14 @@ export default function Navbar() {
             </ul> */}
             <ul className="flex items-center mt-1">
               <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
-                品牌故事
+                <Link href={'/about'}>
+                  <a>品牌故事</a>
+                </Link>
               </li>
               <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
-                最新消息
+                <Link href={'/news'}>
+                  <a>最新消息</a>
+                </Link>
               </li>
               <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
                 產品介紹
