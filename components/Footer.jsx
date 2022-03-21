@@ -4,7 +4,7 @@ import Logo from "../asset/image/logo.png";
 
 export default function footer() {
     return (
-        <footer className='py-16 bg-orange-50 '>
+        <footer className='py-16 bg-orange-100 '>
             <div className="text-center">
                 <div className="mt-2 mx-auto" style={{ maxWidth: '200px' }}>
                     <Image src={Logo} alt="Logo" />

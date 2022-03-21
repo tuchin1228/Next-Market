@@ -35,7 +35,9 @@ export default function Navbar() {
                 產品介紹
               </li>
               <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
-                聯絡我們
+                <Link href={'/contact'}>
+                  <a>聯絡我們</a>
+                </Link>
               </li>
             </ul>
           </div>

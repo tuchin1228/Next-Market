@@ -11,7 +11,7 @@ import { faMapMarkerAlt, faPhone, faStoreAlt, faAngleRight } from '@fortawesome/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export async function getServerSideProps() {
-  
+
   let NewsRes = await axios.get(`${process.env.API_URL}/News/GetTwoNews`);
   let AboutRes = await axios.get(`${process.env.API_URL}/About/showHomeAbout`);
 

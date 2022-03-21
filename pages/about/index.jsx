@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import axios from "axios";
-import styles from "../../styles/News.module.css";
+import styles from "../../styles/About.module.css";
 import Link from "next/link";
 
 
