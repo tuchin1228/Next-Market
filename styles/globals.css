@@ -126,3 +126,8 @@ main {
   width: auto;
   max-width: 100%;
 }
+
+.slick-dots li.slick-active button:before{
+  color: #713f12 !important;
+  opacity: 1 !important;
+}

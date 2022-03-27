@@ -32,7 +32,9 @@ export default function Navbar() {
                 </Link>
               </li>
               <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
-                產品介紹
+                <Link href={'/product'}>
+                  <a>產品介紹</a>
+                </Link>
               </li>
               <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
                 <Link href={'/contact'}>
