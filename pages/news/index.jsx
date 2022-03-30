@@ -36,10 +36,10 @@ export default function news({ news, categories }) {
                             })
                         }
                     </div>
-                    <section className=' max-w-7xl mx-auto grid grid-cols-4 gap-5'>
+                    <section className=' max-w-7xl mx-auto grid grid-cols-4 gap-5 mb-10'>
                         {
                             news.map(item => {
-                                return <div key={item.article_id}>
+                                return <div key={item.article_id} className="p-2 bg-white shadow-lg rounded-lg">
                                     <div className='overflow-hidden rounded-lg my-2'>
                                         <Link href={`/news/${item.cateId}/${item.article_id}`}>
                                             <img className='rounded-lg  transition-all duration-200 transform scale-100 hover:scale-110' src={process.env.Image_URL +

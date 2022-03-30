@@ -145,7 +145,7 @@ export default function Home({ news, about }) {
       </div>
 
       <div className="map container mx-auto py-20 relative px-5 md:px-0">
-        <iframe className="w-full px-5 xl:px-0 rounded-xl shadow-xl" height="550" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5207.690671044539!2d120.30941981093964!3d22.63911691892543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e04f4871d07a7%3A0xccb9296f1ea5e649!2z6auY6ZuE6LuK56uZ!5e0!3m2!1szh-TW!2stw!4v1647443660085!5m2!1szh-TW!2stw" allowfullscreen="" loading="lazy"></iframe>
+        <iframe className="w-full px-5 xl:px-0 rounded-xl shadow-xl" height="550" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5207.690671044539!2d120.30941981093964!3d22.63911691892543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e04f4871d07a7%3A0xccb9296f1ea5e649!2z6auY6ZuE6LuK56uZ!5e0!3m2!1szh-TW!2stw!4v1647443660085!5m2!1szh-TW!2stw" allowFullScreen loading="lazy"></iframe>
         <div className="w-full  mx-auto my-5 lg:my-0 card  py-5 px-5 xl:px-10 bg-white shadow-xl rounded-lg lg:absolute top-1/2 right-0 transform-none lg:transform lg:-translate-x-5 xl:translate-x-1/3 -translate-y-1/2 lg:max-w-xs xl:max-w-md" >
           <h2 className="text-4xl font-bold pb-6 border-b border-gray-200">位置訊息</h2>
           <p className="font-light py-6 lg:text-md xl:text-xl tracking-wider leading-relaxed text-gray-900 ">歡迎透過聯絡表單或專線我們聯繫<br />將有專人盡速為您服務。</p>

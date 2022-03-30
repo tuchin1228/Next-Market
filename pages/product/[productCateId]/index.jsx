@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState, useEffect, useMemo } from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
-import ProductCatousel from "../../components/ProductCatousel";
+import { useRouter } from 'next/router'
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
+import ProductCatousel from "../../../components/ProductCatousel";
 import axios from "axios";
-import styles from "../../styles/Product.module.css";
+import styles from "../../../styles/Product.module.css";
 import Link from "next/link";
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,6 +13,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export default function index({ category, product, productImages }) {
     console.log(category);
     console.log(product);
+    console.log(productImages);
+
+    const router = useRouter()
+    const { productCateId } = router.query
 
     const FilterProductImage = (productId) => {
         return productImages.filter(image => image.product_id == productId)
@@ -31,14 +36,14 @@ export default function index({ category, product, productImages }) {
                         <section className='col-span-4 md:col-span-1'>
                             <article className=' border border-yellow-900 text-xl  mb-2'>
                                 <Link href={`/product`}>
-                                    <a className={`block text-center bg-yellow-900 text-white hover:bg-yellow-800  transition-all duration-200 py-2`}>所有商品</a>
+                                    <a className={`block text-center text-yellow-900 hover:bg-yellow-900 hover:text-white  transition-all duration-200 py-2`}>所有商品</a>
                                 </Link>
                             </article>
                             {
                                 category ? category.map(item => (
                                     <article key={item.id} className=' border border-yellow-900 text-xl  my-2'>
                                         <Link href={`/product/${item.id}`}>
-                                            <a className={`block text-center text-yellow-900 hover:bg-yellow-900 hover:text-white transition-all duration-200 py-2`}>{item.productCateName}</a>
+                                            <a className={`block text-center  transition-all duration-200 py-2 ${item.id == productCateId ? 'text-white bg-yellow-900 hover:bg-yellow-800 ' : 'text-yellow-900 hover:bg-yellow-900 hover:text-white'}`}>{item.productCateName}</a>
                                         </Link>
                                     </article>
                                 )) : null
@@ -59,7 +64,7 @@ export default function index({ category, product, productImages }) {
                                             </div>
                                             <div className='mt-3 '>
                                                 <Link href={`/product/${item.productCateId}/${item.productId}`}>
-                                                    <a  className='block ml-auto mr-0 w-full text-center px-3 py-2 bg-yellow-900 hover:bg-yellow-800 text-white text-xl'><FontAwesomeIcon icon={faCartPlus}></FontAwesomeIcon> 立即購買</a>
+                                                    <a className='block ml-auto mr-0 w-full text-center px-3 py-2 bg-yellow-900 hover:bg-yellow-800 text-white text-xl'><FontAwesomeIcon icon={faCartPlus}></FontAwesomeIcon> 立即購買</a>
                                                 </Link>
                                             </div>
                                         </div>
@@ -81,9 +86,9 @@ export default function index({ category, product, productImages }) {
 }
 
 
-export async function getServerSideProps() {
-    let ProductRes = await axios.get(`${process.env.API_URL}/Product/category`);
+export async function getServerSideProps({ query }) {
 
+    let ProductRes = await axios.get(`${process.env.API_URL}/Product/category/${query.productCateId}`);
     return { props: { category: ProductRes.data.category, product: ProductRes.data.product, productImages: ProductRes.data.productImages } }
 
 }
