@@ -18,7 +18,8 @@ export default function index({ product, productAddition, productDetail, product
   console.log('productImages', productImages);
 
   const [checkBoxProduct, setCheckBoxProduct] = useState({}); //勾選的商品
-  const [tempCount, setTempCount] = useState(1) //商品數量
+  const [tempCount, setTempCount] = useState(1); //商品數量
+  const [activeTab, setActiveTab] = useState(1); //下方三個標籤切換
 
   useEffect(() => {
     //初始化預設第一個商品
@@ -65,6 +66,10 @@ export default function index({ product, productAddition, productDetail, product
     }
   }
 
+  const ToggleTab = (tab) =>{
+    setActiveTab(count => count = tab)
+  }
+  
   const showcheckBoxProduct = () => {
     console.log(checkBoxProduct);
   }
@@ -148,13 +153,15 @@ export default function index({ product, productAddition, productDetail, product
 
       <article className='mb-10  max-w-7xl mx-auto'>
         <div className='grid grid-cols-3 gap-1  '>
-          <a href="javascript:;" className={`w-full text-center py-2 text-xl text-white bg-yellow-900 hover:bg-yellow-800 transition-all duration-150`}>商品介紹</a>
-          <a href="javascript:;" className={`w-full text-center py-2 text-xl text-yellow-900 bg-orange-100 hover:bg-yellow-900 hover:text-white transition-all duration-150`}>商品組成</a>
-          <a href="javascript:;" className={`w-full text-center py-2 text-xl text-yellow-900 bg-orange-100 hover:bg-yellow-900 hover:text-white transition-all duration-150`}>購物須知</a>
+          <a href="javascript:;" onClick={()=>ToggleTab(1)} className={`w-full text-center py-2 text-xl ${activeTab == 1 ? 'text-white bg-yellow-900 hover:bg-yellow-800 ':'text-yellow-900 bg-orange-100 hover:bg-yellow-900 hover:text-white'} transition-all duration-150`}>商品介紹</a>
+          <a href="javascript:;" onClick={()=>ToggleTab(2)} className={`w-full text-center py-2 text-xl ${activeTab == 2 ? 'text-white bg-yellow-900 hover:bg-yellow-800 ':'text-yellow-900 bg-orange-100 hover:bg-yellow-900 hover:text-white'} transition-all duration-150`}>商品組成</a>
+          <a href="javascript:;" onClick={()=>ToggleTab(3)} className={`w-full text-center py-2 text-xl ${activeTab == 3 ? 'text-white bg-yellow-900 hover:bg-yellow-800 ':'text-yellow-900 bg-orange-100 hover:bg-yellow-900 hover:text-white'} transition-all duration-150`}>購物須知</a>
         </div>
         <div className='htmlTemplate py-5'>
-
-          <div dangerouslySetInnerHTML={{ __html: product.description }}></div>
+          
+          <div className={`${activeTab == 1 ? '':'hidden'} `} dangerouslySetInnerHTML={{ __html: product.description }}></div>
+          <div className={`${activeTab == 2 ? '':'hidden'} `} dangerouslySetInnerHTML={{ __html: product.composition }}></div>
+          <div className={`${activeTab == 3 ? '':'hidden'} `} dangerouslySetInnerHTML={{ __html: product.buyflow }}></div>
 
         </div>
 
