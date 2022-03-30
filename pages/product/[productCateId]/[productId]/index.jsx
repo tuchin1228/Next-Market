@@ -115,8 +115,8 @@ export default function index({ product, productAddition, productDetail, product
                         <section className={` tracking-widest flex-grow `}
                           onClick={() => setCheckBoxProduct(detail)}>
                           <h3 className='text-yellow-900 font-medium mb-1 text-md'>{detail.productDetailName}</h3>
-                          {detail.salePrice ? (
-                            <h4 className='tracking-widest text-red-500 text-md'>優惠價：NTD ${Math.round(detail.salePrice)}</h4>
+                          {detail.salePrice && detail.salePrice < detail.originPrice ? (
+                            <h4 className='tracking-widest text-red-500 text-md'><span className='text-sm text-gray-400' style={{textDecoration:'line-through'}}>原價：NTD ${Math.round(detail.originPrice)}</span>　優惠價：NTD ${Math.round(detail.salePrice)}</h4>
                           ) : (
                             <h4 className='tracking-widest text-gray-700 text-md'>售　價：NTD ${Math.round(detail.originPrice)}</h4>
                           )}
