@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Login from "./Login";
 import Logo from "../asset/image/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faClipboardList ,faUser } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faClipboardList, faUser } from '@fortawesome/free-solid-svg-icons'
 export default function Navbar() {
+
+  const [showLogin, setShowLogin] = useState(false);
+
+  const ToggleShowLogin = (status) => {
+    setShowLogin(status)
+  }
   return (
     <>
       <div className=" bg-white shadow fixed top-0 w-full left-0 z-50 ">
@@ -51,13 +58,26 @@ export default function Navbar() {
               <li className="text-lg  py-1 px-3 text-gray-700 relative">
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faClipboardList} /></p>
               </li>
+              {/* <li className="text-lg  py-1 px-3 text-gray-700 relative">
+                <Link href={'/login'}>
+                  <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
+                </Link>
+              </li> */}
               <li className="text-lg  py-1 px-3 text-gray-700 relative">
-                <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
+                <Link href={'/user/login'}>
+                  <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
+                </Link>
               </li>
+              {/* <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => ToggleShowLogin(true)}>
+                <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
+              </li> */}
             </ul>
           </div>
         </div>
       </div>
+
+      <Login showLogin={showLogin} ToggleShowLogin={ToggleShowLogin} />
+
     </>
   );
 }
