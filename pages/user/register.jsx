@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import styles from "../../styles/User.module.css";
 import Link from "next/link";
-import City from '../../asset/data/tw_city'
+import City from '../../asset/extention/tw_city'
 
 
 export default function index() {

@@ -5,7 +5,8 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import styles from "../../styles/User.module.css";
 import Link from "next/link";
-import City from '../../asset/data/tw_city'
+import City from '../../asset/extention/tw_city'
+import jwt_decode from "jwt-decode";
 import qs from 'qs';
 
 
@@ -15,11 +16,14 @@ export default function Login({ showLogin, ToggleShowLogin }) {
     const [client_id, setClient_id] = useState('1657025850')
     const [redirect_uri, setRedirect_uri] = useState(`${process.env.BASE_URL}${router.pathname}`)
     const [client_secret, setClient_secret] = useState('43767fd63709e07c151db2fcfca23822')
+    const [access_token, setAccess_token] = useState('')
+    const [id_token, setId_token] = useState('')
 
     // 檢查網址有無code
     useEffect(() => {
         console.log(router.query);
         if (router.query && router.query.code) {
+            console.log('有code',router.query.code);
             LineGetAccessToken()
         }
     }, [router])
@@ -30,71 +34,56 @@ export default function Login({ showLogin, ToggleShowLogin }) {
         location.href = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${new Date().getTime()}&scope=profile%20openid%20email`
     }
 
+    // 取得Line Access Token
     const LineGetAccessToken = async () => {
-        // console.log({
-        //     grant_type: 'authorization_code',
-        //     code: router.query.code,
-        //     redirect_uri: redirect_uri,
-        //     client_id: client_id,
-        //     client_secret: client_secret,
-        // });
-        const queryString = window.location.search;
-        console.log(queryString);
-
-        let urlParams = new URLSearchParams(queryString)
-        console.log(urlParams);
-        // let res = await axios({
-        //     url: `https://api.line.me/oauth2/v2.1/token`,
-        //     method:'post',
-        //     headers: {
-        //         'Content-Type': 'application/x-www-form-urlencoded'
-        //     },
-        //     data: {
-        //         grant_type: 'authorization_code',
-        //         code: JSON.stringify(router.query.code),
-        //         redirect_uri: JSON.stringify(redirect_uri),
-        //         client_id: JSON.stringify(client_id),
-        //         client_secret: JSON.stringify(client_secret),
-        //     }
-        // })
-        console.log({
-            grant_type: 'authorization_code',
-            code: urlParams.get('code'),
-            redirect_uri: redirect_uri,
-            client_id: client_id,
-            client_secret: client_secret,
-        });
-        // $.ajax({
-        //     url: 'https://api.line.me/oauth2/v2.1/token',
-        //     type: 'POST',
-        //     contentType: 'application/x-www-form-urlencoded',
-        //     data: {
-        //         grant_type: 'authorization_code',
-        //         client_id: client_id,
-        //         client_secret: client_secret,
-        //         code: router.query.code,
-        //         redirect_uri: redirect_uri
-        //     },
-        //     success: function (res) {
-        //         console.log(res);
-        //     }
-        // })
+        console.log('有code',router.query.code);
         let res = await axios.post(`https://api.line.me/oauth2/v2.1/token`,
-            {
+            qs.stringify({
                 grant_type: 'authorization_code',
-                code:  router.query.code,
+                code: router.query.code,
                 redirect_uri: redirect_uri,
                 client_id: client_id,
                 client_secret: client_secret,
-            },
+            }),
             {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
                 }
             }
-        )
+        ).catch(err => {
+            console.log('有錯誤');
+            router.push('/user/login')
+        })
         console.log(res);
+        if (res && res.data && res.data.access_token) {
+            let data = jwt_decode(res.data.id_token)
+            console.log(data);
+            setAccess_token(token => token = res.data.access_token)
+            setId_token(token => token = res.data.id_token)
+
+            // 個資法關係，要取得用戶信箱要在Provider申請啟用信箱
+            // await LineGetUserInfo(res.data.id_token)
+        }else{
+            router.push('/user/login')
+        }
     }
+    // 取得Line User
+    // const LineGetUserInfo = async (id_token) => {
+    //     console.log(client_id,id_token);
+    //     let res = await axios.post(`https://api.line.me/oauth2/v2.1/verify`,
+    //         qs.stringify({
+    //             client_id: client_id,
+    //             id_token: id_token,
+    //         }),
+    //         {
+    //             headers: {
+    //                 'Content-Type': 'application/x-www-form-urlencoded',
+    //             }
+    //         })
+    //     console.log('LineGetUserInfo', res);
+    // }
+
+
 
     return (
 
@@ -140,10 +129,10 @@ export default function Login({ showLogin, ToggleShowLogin }) {
                         </div>
                     </div>
                 </div>
-            
+
             </article>
-            
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
+
+            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
             <Footer />
         </>
     )
