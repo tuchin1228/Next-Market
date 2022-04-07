@@ -16,6 +16,8 @@ export default function about({ about }) {
             <Navbar />
             <article className='min-h-screen mt-24 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
+                <h2 className='text-3xl my-16 text-center font-light tracking-widest text-yellow-900'>關　於　我　們<br /><span className='text-lg'>Contact Us</span></h2>
+
                 <div className="category">
                     <div className=' flex justify-center items-center my-16'>
                         {

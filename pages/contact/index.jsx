@@ -39,7 +39,7 @@ export default function index() {
             contactCategoryId: contactCategoryId,
             email: email,
             direction: direction,
-            
+
         }
         let ContactRes = await axios.post(`${process.env.API_URL}/Contact/submitContact`,
             data
@@ -61,9 +61,10 @@ export default function index() {
             <Navbar />
             <article className='min-h-screen mt-24 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
+                <h2 className='text-3xl my-16 text-center font-light tracking-widest text-yellow-900'>聯　絡　我　們<br /><span className='text-lg'>Contact Us</span></h2>
 
                 <form action="" className="grid grid-cols-1 md:grid-cols-2 py-10 max-w-5xl mx-auto gap-2">
-                    <h2 className='col-span-2  my-5 font-bold text-5xl'>聯絡我們</h2>
+                    {/* <h2 className='col-span-2  my-5 font-bold text-5xl'>聯絡我們</h2> */}
 
                     <section >
                         <label htmlFor="category" className='block text-xl p-1 my-1 text-yellow-900 font-light'>問題分類</label>

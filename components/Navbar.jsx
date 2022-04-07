@@ -1,17 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from "next/link";
 import Login from "./Login";
 import Logo from "../asset/image/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faClipboardList, faUser } from '@fortawesome/free-solid-svg-icons'
+import { CheckLoginStatus, SetCookie } from '../asset/extention/AuthCheck'
+
 export default function Navbar() {
+  const router = useRouter()
+  const [LoginStatus, setLoginStatus] = useState(false);
 
-  const [showLogin, setShowLogin] = useState(false);
+  useEffect(() => {
 
-  const ToggleShowLogin = (status) => {
-    setShowLogin(status)
-  }
+    let Check = CheckLoginStatus(router);
+    if (!Check) {
+      setLoginStatus(false)
+    } else {
+      setLoginStatus(true)
+    }
+
+  }, [])
+  // const ToggleShowLogin = (status) => {
+  //   setShowLogin(status)
+  // }
+
+
+  // const CheckLoginStatus = () => { //未登入->login 登入->會員頁面
+  //   console.log(document.cookie);
+  //   let userId = getCookie('userId')
+  //   let token = getCookie('token')
+  //   console.log('userId',userId,'token',token);
+  //   if (userId && token) {
+  //     router.push('/')
+  //   } else {
+  //     document.cookie = "userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+  //     document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+  //     router.push('/user/login')
+  //   }
+  // }
+  // const getCookie = (cname) => {
+  //   let name = cname + "=";
+  //   let decodedCookie = decodeURIComponent(document.cookie);
+  //   let ca = decodedCookie.split(';');
+  //   for (let i = 0; i < ca.length; i++) {
+  //     let c = ca[i];
+  //     while (c.charAt(0) == ' ') {
+  //       c = c.substring(1);
+  //     }
+  //     if (c.indexOf(name) == 0) {
+  //       return c.substring(name.length, c.length);
+  //     }
+  //   }
+  //   return "";
+  // }
+
+
   return (
     <>
       <div className=" bg-white shadow fixed top-0 w-full left-0 z-50 ">
@@ -63,10 +108,22 @@ export default function Navbar() {
                   <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
                 </Link>
               </li> */}
+              {/* <li onClick={() => CheckLoginStatus()} className="text-lg  py-1 px-3 text-gray-700 relative"> */}
               <li className="text-lg  py-1 px-3 text-gray-700 relative">
-                <Link href={'/user/login'}>
+                {
+                  LoginStatus ? (
+                    <Link href={'/user/userinfo'}>
+                      <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
+                    </Link>
+                  ) : (
+                    <Link href={'/user/login'}>
+                      <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
+                    </Link>
+                  )
+                }
+                {/* <Link href={'/user/login'}>
                   <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
-                </Link>
+                </Link> */}
               </li>
               {/* <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => ToggleShowLogin(true)}>
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
@@ -76,7 +133,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <Login showLogin={showLogin} ToggleShowLogin={ToggleShowLogin} />
+      {/* <Login showLogin={showLogin} ToggleShowLogin={ToggleShowLogin} /> */}
 
     </>
   );

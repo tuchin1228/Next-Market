@@ -9,6 +9,7 @@ import City from '../../asset/extention/tw_city'
 
 
 export default function index() {
+    const router = useRouter()
     console.log(City);
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
@@ -28,9 +29,12 @@ export default function index() {
         const params = new URLSearchParams(window.location.search)
         let sub = params.get('sub')
         console.log('sub', sub);
+        // if (!sub) { //沒有帶LineSub就轉址
+        //     router.push('/user/login')
+        // } else {
+        //     setSub((linesub) => linesub = sub)
+        // }
         if (!sub) { //沒有帶LineSub就轉址
-            router.push('/user/login')
-        } else {
             setSub((linesub) => linesub = sub)
         }
     }, [])
@@ -52,10 +56,10 @@ export default function index() {
     }
 
     const SubmitRegister = async () => {
-        if(!name || !phone || !password || !confirmPassword || !address || !CityName || !AreaName){
+        if (!name || !phone || !password || !confirmPassword || !address || !CityName || !AreaName) {
             alert('欄位填寫不完全')
             return null;
-        }else if(password !== confirmPassword){
+        } else if (password !== confirmPassword) {
             alert('兩次密碼輸入不同')
             return null;
         }
@@ -73,9 +77,9 @@ export default function index() {
         })
 
         console.log(res);
-        if(res.data.success){
+        if (res.data.success) {
             router.push('/user/login')
-        }else{
+        } else {
             alert(res.data.msg)
         }
     }

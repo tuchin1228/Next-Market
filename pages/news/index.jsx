@@ -26,7 +26,8 @@ export default function news({ news, categories }) {
 
             <article className='min-h-screen mt-24 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
-
+                <h2 className='text-3xl my-16 text-center font-light tracking-widest text-yellow-900'>最　新　消　息<br /><span className='text-lg'>News</span></h2>
+                    
                 <div className="category">
                     <div className=' flex justify-center items-center my-16'>
                         <Link href={'news'}><a className='px-12 py-2 bg-yellow-900 hover:bg-yellow-900 transition-all duration-200 text-white text-lg mx-3 rounded-full tracking-widest'>所有公告</a></Link>

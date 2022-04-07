@@ -9,6 +9,7 @@ import City from '../../asset/extention/tw_city'
 import jwt_decode from "jwt-decode";
 import qs from 'qs';
 import { route } from 'next/dist/server/router';
+import { CheckLoginStatus, SetCookie } from '../../asset/extention/AuthCheck'
 
 export default function Login({ showLogin, ToggleShowLogin }) {
     const router = useRouter()
@@ -26,6 +27,10 @@ export default function Login({ showLogin, ToggleShowLogin }) {
 
     // 檢查網址有無code
     useEffect(() => {
+        let Check = CheckLoginStatus(router);
+        if (Check) {
+            router.push('/')
+        }
         console.log(router.query);
         if (router.query && router.query.code) {
             console.log('有code', router.query.code);
@@ -85,8 +90,11 @@ export default function Login({ showLogin, ToggleShowLogin }) {
             let res = await axios.post(`${process.env.API_URL}/User/login`, { LineSub: sub })
             console.log(res);
             if (res.data.success) {
-                document.cookie = `userId=${res.data.userId}`;
-                document.cookie = `token=${res.data.token}`;
+                // let date = new Date();
+                // date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
+                // const expires = "expires=" + date.toUTCString();
+                SetCookie('userId', res.data.userId, 7)
+                SetCookie('token', res.data.token, 7)
                 console.log(document.cookie);
                 router.push('/')
             } else {
@@ -107,8 +115,13 @@ export default function Login({ showLogin, ToggleShowLogin }) {
         })
         console.log(res);
         if (res.data.success) {
-            document.cookie = `userId=${res.data.userId}`;
-            document.cookie = `token=${res.data.token}`;
+            // let date = new Date();
+            // date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
+            // const expires = "expires=" + date.toUTCString();
+            // document.cookie = `userId=${res.data.userId} ${expires}`;
+            // document.cookie = `token=${res.data.token} ${expires}`;
+            SetCookie('userId', res.data.userId, 7)
+            SetCookie('token', res.data.token, 7)
             router.push('/')
 
         } else {
@@ -117,6 +130,40 @@ export default function Login({ showLogin, ToggleShowLogin }) {
 
     }
 
+    // const CheckLoginStatus = () => { //未登入->login 登入->會員頁面
+    //     console.log(document.cookie);
+    //     let userId = getCookie('userId')
+    //     let token = getCookie('token')
+    //     console.log('userId', userId, 'token', token);
+    //     if (userId && token) {
+    //         router.push('/')
+    //     } else {
+    //         SetCookie('userId', '', -1)
+    //         SetCookie('token', '', -1)
+    //         //   router.push('/user/login')
+    //     }
+    // }
+    // const getCookie = (cname) => {
+    //     let name = cname + "=";
+    //     let decodedCookie = decodeURIComponent(document.cookie);
+    //     let ca = decodedCookie.split(';');
+    //     for (let i = 0; i < ca.length; i++) {
+    //         let c = ca[i];
+    //         while (c.charAt(0) == ' ') {
+    //             c = c.substring(1);
+    //         }
+    //         if (c.indexOf(name) == 0) {
+    //             return c.substring(name.length, c.length);
+    //         }
+    //     }
+    //     return "";
+    // }
+    // const SetCookie = (name, value, days) => {
+    //     var date = new Date();
+    //     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    //     var expires = '; expires=' + date.toGMTString();
+    //     document.cookie = `${name}=${value};expires=${expires};`;
+    // };
     // 取得Line User
     // const LineGetUserInfo = async (id_token) => {
     //     console.log(client_id,id_token);
@@ -145,7 +192,8 @@ export default function Login({ showLogin, ToggleShowLogin }) {
                 <div className={` py-10 max-w-4xl mx-auto gap-2  `} >
                     <div className="">
                         <div>
-                            <h2 className='text-3xl font-bold text-center tracking-widest text-yellow-900'>會員登入</h2>
+                            <h2 className='text-3xl my-16 text-center font-light tracking-widest text-yellow-900'>會　員　登　入<br /><span className='text-lg'>Login</span></h2>
+
                             <form action="">
                                 <div className='my-5'>
                                     <label htmlFor="" className=' block my-1 text-lg text-yellow-900'>行動電話：</label>
