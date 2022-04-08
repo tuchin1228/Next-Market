@@ -22,6 +22,12 @@ export default function UserInfo() {
     const [CityName, setCityName] = useState('')
     const [AreaName, setAreaName] = useState('')
 
+    // 修改密碼
+    const [showRenewParssword, setShowRenewParssword] = useState(false)
+    const [verify_phone, setVerify_phone] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [ConfirmNewPassword, setConfirmNewPassword] = useState('')
+
     const [CityArrray, setCityArrray] = useState([])
     const [AreaArrray, setAreaArrray] = useState([])
 
@@ -58,8 +64,8 @@ export default function UserInfo() {
 
     // 縣市更新，區域陣列更新完再選第一個區域為預設值
     useEffect(() => {
-        console.log('縣市更新',City[`${CityName}`]);
-        if (AreaArrray && AreaArrray.length > 0  ) {
+        console.log('縣市更新', City[`${CityName}`]);
+        if (AreaArrray && AreaArrray.length > 0) {
             console.log('有', AreaArrray);
             setAreaName(AreaArrray[0])
         }
@@ -89,7 +95,15 @@ export default function UserInfo() {
             // setUserinfo(res.data.user)
             setAreaArrray(City[`${res.data.user.country}`])
             setName(res.data.user.name)
-            setPhone(res.data.user.phone)
+
+            let phone = res.data.user.phone.split('');
+            phone.forEach((num, idx) => {
+                if (idx >= 2 && idx < 8) {
+                    phone[idx] = '*'
+                }
+            })
+            phone = phone.join('');
+            setPhone(phone)
             setPassword('******')
             setEmail(res.data.user.email)
             setAddress(res.data.user.address)
@@ -120,13 +134,38 @@ export default function UserInfo() {
             token: token
         })
         console.log(res);
-        if(res.data.success){
+        if (res.data.success) {
             alert('會員資訊更新成功')
             GetUserInfo()
-        }else{
+        } else {
             alert('會員認證錯誤')
         }
 
+    }
+
+    const UpdateUserPassword = async () => {
+        if (!verify_phone || !newPassword || !ConfirmNewPassword) {
+            alert('欄位填寫不完全')
+            return null;
+        }
+        if (newPassword !== ConfirmNewPassword) {
+            alert('兩次密碼輸入不同')
+            return null;
+        }
+        let res = await axios.post(`${process.env.API_URL}/User/edit_password`, {
+            verify_phone: verify_phone,
+            newPassword: newPassword,
+            userId: userId,
+            token: token
+        })
+        console.log(res);
+        if (res.data.success) {
+            alert('會員密碼更新成功')
+            setShowRenewParssword(false)
+            GetUserInfo()
+        }else{
+            alert('密碼更新失敗')
+        }
     }
 
     return (
@@ -148,7 +187,10 @@ export default function UserInfo() {
                         <input type="tel" disabled id="phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
                     </section>
                     <section className='my-5'>
-                        <label htmlFor="password" className='block text-xl p-1 my-1 text-yellow-900 font-light'>密碼</label>
+                        <div className="flex items-center ">
+                            <label htmlFor="password" className='block text-xl p-1 my-1 text-yellow-900 font-light'>密碼</label>
+                            <button type='button' className='text-gray-500 ml-3 text-lg border-b border-transparent hover:border-gray-400' onClick={() => setShowRenewParssword(true)}>修改密碼</button>
+                        </div>
                         <input type="password" disabled id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
                     </section>
                     <section className='my-5'>
@@ -184,6 +226,33 @@ export default function UserInfo() {
                 </form>
 
             </article>
+
+            {
+                showRenewParssword ? (
+                    <div className="w-4/5  mx-auto z-10 my-5 lg:my-0 card  py-5 px-5 xl:px-10 bg-white shadow-xl rounded-lg fixed top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2  lg:max-w-xs xl:max-w-md" >
+                        <h2 className="text-4xl font-bold pb-6 border-b border-gray-200">修改密碼</h2>
+                        <section className='my-5'>
+                            <label htmlFor="verify_phone" className='block text-xl p-1 my-1 text-yellow-900 font-light'>認證電話</label>
+                            <input type="tel" id="verify_phone" name="verify_phone" value={verify_phone} onChange={(e) => setVerify_phone(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
+                        </section>
+                        <section className='my-5'>
+                            <label htmlFor="newPassword" className='block text-xl p-1 my-1 text-yellow-900 font-light'>新密碼</label>
+                            <input type="password" id="newPassword" name="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
+                        </section>
+                        <section className='my-5'>
+                            <label htmlFor="ConfirmNewPassword" className='block text-xl p-1 my-1 text-yellow-900 font-light'>確認新密碼</label>
+                            <input type="password" id="ConfirmNewPassword" name="ConfirmNewPassword" value={ConfirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
+                        </section>
+                        <div className="flex justify-around my-5">
+                            <button type="button" onClick={() => UpdateUserPassword()} className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-red-500 hover:bg-red-400 text-white ">送出</button>
+                            <button type="button" onClick={() => setShowRenewParssword(false)} className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-gray-400 hover:bg-gray-300 text-white ">取消</button>
+                        </div>
+                    </div>
+                ) : (
+                    null
+                )
+            }
+
 
             <Footer />
 

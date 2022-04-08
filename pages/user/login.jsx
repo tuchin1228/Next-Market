@@ -18,6 +18,13 @@ export default function Login({ showLogin, ToggleShowLogin }) {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
 
+    // 重設密碼
+    const [showRenewParssword, setShowRenewParssword] = useState(false)
+    const [verify_phone, setVerify_phone] = useState('')
+    const [verify_email, setVerify_email] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [ConfirmNewPassword, setConfirmNewPassword] = useState('')
+
     // Line Need
     const [client_id, setClient_id] = useState('1657025850')
     const [redirect_uri, setRedirect_uri] = useState(`${process.env.BASE_URL}${router.pathname}`)
@@ -180,6 +187,28 @@ export default function Login({ showLogin, ToggleShowLogin }) {
     //     console.log('LineGetUserInfo', res);
     // }
 
+    const ResetPassword = async () => {
+        if (!verify_phone || !newPassword || !ConfirmNewPassword || !verify_email) {
+            alert('欄位填寫不完全')
+            return null;
+        }
+        if (newPassword !== ConfirmNewPassword) {
+            alert('兩次密碼輸入不同')
+            return null;
+        }
+        let res = await axios.post(`${process.env.API_URL}/User/reset_password`, {
+            verify_phone: verify_phone,
+            verify_email: verify_email,
+            newPassword: newPassword,
+        })
+        console.log(res);
+        if (res.data.success) {
+            alert('密碼重設成功')
+            setShowRenewParssword(false)
+        } else {
+            alert('密碼更新失敗')
+        }
+    }
 
     return (
 
@@ -210,7 +239,7 @@ export default function Login({ showLogin, ToggleShowLogin }) {
 
                                 </div>
                                 <div className='text-center flex justify-center my-3'>
-                                    <button type='button' className='   px-2 text-gray-300 hover:text-gray-400 '>忘記密碼</button>
+                                    <button type='button' onClick={() => setShowRenewParssword(true)} className='   px-2 text-gray-300 hover:text-gray-400 '>忘記密碼</button>
                                     <div className='border-r border-gray-300'></div>
                                     <Link href={`/user/register`}>
                                         <a className='   px-2 text-gray-300 hover:text-gray-400'>立即註冊</a>
@@ -230,6 +259,36 @@ export default function Login({ showLogin, ToggleShowLogin }) {
                 </div>
 
             </article>
+            {
+                showRenewParssword ? (
+                    <div className="w-4/5  mx-auto z-10 my-5 lg:my-0 card  py-5 px-5 xl:px-10 bg-white shadow-xl rounded-lg fixed top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2  lg:max-w-xs xl:max-w-md" >
+                        <h2 className="text-4xl font-bold pb-6 border-b border-gray-200">修改密碼</h2>
+                        <section className='my-5'>
+                            <label htmlFor="verify_phone" className='block text-xl p-1 my-1 text-yellow-900 font-light'>認證電話</label>
+                            <input type="tel" id="verify_phone" name="verify_phone" value={verify_phone} onChange={(e) => setVerify_phone(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
+                        </section>
+
+                        <div className='my-5'>
+                            <label htmlFor="verify_email" className=' block my-1 text-lg text-yellow-900'>信箱：</label>
+                            <input type="email" name="verify_email" id="verify_email" value={verify_email} onChange={(e) => setVerify_email(e.target.value)} className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='' />
+                        </div>
+                        <section className='my-5'>
+                            <label htmlFor="newPassword" className='block text-xl p-1 my-1 text-yellow-900 font-light'>新密碼</label>
+                            <input type="password" id="newPassword" name="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
+                        </section>
+                        <section className='my-5'>
+                            <label htmlFor="ConfirmNewPassword" className='block text-xl p-1 my-1 text-yellow-900 font-light'>確認新密碼</label>
+                            <input type="password" id="ConfirmNewPassword" name="ConfirmNewPassword" value={ConfirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
+                        </section>
+                        <div className="flex justify-around my-5">
+                            <button type="button" onClick={() => ResetPassword()} className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-red-500 hover:bg-red-400 text-white ">送出</button>
+                            <button type="button" onClick={() => setShowRenewParssword(false)} className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-gray-400 hover:bg-gray-300 text-white ">取消</button>
+                        </div>
+                    </div>
+                ) : (
+                    null
+                )
+            }
 
             <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js'></script>
             <Footer />
