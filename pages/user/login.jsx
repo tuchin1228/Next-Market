@@ -8,8 +8,9 @@ import Link from "next/link";
 import City from '../../asset/extention/tw_city'
 import jwt_decode from "jwt-decode";
 import qs from 'qs';
+import Cookies from 'js-cookie'
 import { route } from 'next/dist/server/router';
-import { CheckLoginStatus, SetCookie } from '../../asset/extention/AuthCheck'
+import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
 
 export default function Login({ showLogin, ToggleShowLogin }) {
     const router = useRouter()
@@ -36,24 +37,26 @@ export default function Login({ showLogin, ToggleShowLogin }) {
     useEffect(() => {
         let Check = CheckLoginStatus(router);
         if (Check) {
+            // alert('轉址')
             router.push('/')
         }
+
         console.log(router.query);
         if (router.query && router.query.code) {
             console.log('有code', router.query.code);
             LineGetAccessToken()
         }
-    }, [router])
+    }, [router.query])
 
     // Line登入畫面
     const LineLogin = async () => {
-
         location.href = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${new Date().getTime()}&scope=profile%20openid%20email`
     }
 
     // 取得Line Access Token
     const LineGetAccessToken = async () => {
         console.log('有code', router.query.code);
+
         let res = await axios.post(`https://api.line.me/oauth2/v2.1/token`,
             qs.stringify({
                 grant_type: 'authorization_code',
@@ -73,13 +76,12 @@ export default function Login({ showLogin, ToggleShowLogin }) {
         })
         console.log(res);
         if (res && res.data && res.data.access_token) {
-            let data = jwt_decode(res.data.id_token)
-            console.log(data);
-            setAccess_token(token => token = res.data.access_token)
-            setId_token(token => token = res.data.id_token)
-            CheckLineUser(data.sub)
+            let data = await jwt_decode(res.data.id_token)
+            // console.log('jwt', data);
+            await CheckLineUser(data.sub)
             // 先檢查有沒有此Line user sub在資料庫，有=>直接登入 沒有=>詢問是否擁有帳戶==>有->輸入電話與密碼綁定，沒有->註冊
-
+            // setAccess_token(res.data.access_token)
+            // setId_token(res.data.id_token)
 
             // 個資法關係，要取得用戶信箱要在Provider申請啟用信箱
             // await LineGetUserInfo(res.data.id_token)
@@ -94,41 +96,32 @@ export default function Login({ showLogin, ToggleShowLogin }) {
         console.log(res);
         if (res.data.success && res.data.status == 1) { //已綁定 直接登入
             // 走登入API
-            let res = await axios.post(`${process.env.API_URL}/User/login`, { LineSub: sub })
-            console.log(res);
-            if (res.data.success) {
-                // let date = new Date();
-                // date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-                // const expires = "expires=" + date.toUTCString();
-                SetCookie('userId', res.data.userId, 7)
-                SetCookie('token', res.data.token, 7)
-                console.log(document.cookie);
-                router.push('/')
-            } else {
-                alert('登入失敗')
-            }
+            Login('line', sub)
         } else { //未綁定，需選擇是否註冊過
-            // document.cookie = `Line_Sub=${sub}`;
             router.push({ pathname: '/user/checkRegister', query: { sub: sub } })
-            // location.href='/user/checkRegister'
         }
     }
 
-    const Login = async () => {
+    const Login = async (type, sub = null) => {
+        let res = null;
+        switch (type) {
+            case 'line':
+                res = await axios.post(`${process.env.API_URL}/User/login`, {
+                    LineSub: sub
+                })
+                break;
+            case 'normal':
+                res = await axios.post(`${process.env.API_URL}/User/login`, {
+                    phone: phone,
+                    password: password
+                })
+                break;
+        }
 
-        let res = await axios.post(`${process.env.API_URL}/User/login`, {
-            phone: phone,
-            password: password
-        })
         console.log(res);
         if (res.data.success) {
-            // let date = new Date();
-            // date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-            // const expires = "expires=" + date.toUTCString();
-            // document.cookie = `userId=${res.data.userId} ${expires}`;
-            // document.cookie = `token=${res.data.token} ${expires}`;
-            SetCookie('userId', res.data.userId, 7)
-            SetCookie('token', res.data.token, 7)
+            Cookies.set('userId', res.data.userId, { expires: 7 })
+            Cookies.set('token', res.data.token, { expires: 7 })
             router.push('/')
 
         } else {
@@ -234,7 +227,7 @@ export default function Login({ showLogin, ToggleShowLogin }) {
                                 </div>
 
                                 <div className='text-center'>
-                                    <button type='button' onClick={() => Login()} className=' mx-1 px-5 py-1 mt-3 mb-5 border-2 border-gray-200 text-xl text-gray-400 hover:text-yellow-900 hover:border-yellow-900 transition-all duration-200 '>登　入</button>
+                                    <button type='button' onClick={() => Login('normal')} className=' mx-1 px-5 py-1 mt-3 mb-5 border-2 border-gray-200 text-xl text-gray-400 hover:text-yellow-900 hover:border-yellow-900 transition-all duration-200 '>登　入</button>
                                     {/* <button type='button' onClick={() => ToggleShowLogin(false)} className=' mx-1 px-5 py-1 mt-3 mb-5 border-2 border-gray-200 text-xl text-gray-400 hover:text-yellow-900 hover:border-yellow-900 transition-all duration-200 '>取　消</button> */}
 
                                 </div>

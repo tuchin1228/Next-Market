@@ -91,14 +91,40 @@
     letter-spacing: .1em;
 }
 
+
+
+.AdditionCountBtn {
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+
+.AdditionCountInput{
+    width: 60px;
+    height: 30px;
+    background: white;
+    /* line-height: 50px; */
+    /* border: 1px solid #ececec; */
+    /* font-size: 15px; */
+    /* color: #959595; */
+    text-align: center;
+    letter-spacing: .1em;
+}
+
+
 /* Chrome, Safari, Edge, Opera */
 .CartCountInput::-webkit-outer-spin-button,
-.CartCountInput::-webkit-inner-spin-button {
+.CartCountInput::-webkit-inner-spin-button,
+.AdditionCountInput::-webkit-outer-spin-button,
+.AdditionCountInput::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
-.CartCountInput[type=number] {
+.CartCountInput[type=number],
+.AdditionCountInput[type=number] {
   -moz-appearance: textfield;
 }
+
+

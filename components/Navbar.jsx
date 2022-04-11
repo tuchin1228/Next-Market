@@ -6,7 +6,7 @@ import Login from "./Login";
 import Logo from "../asset/image/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faClipboardList, faUser } from '@fortawesome/free-solid-svg-icons'
-import { CheckLoginStatus, SetCookie } from '../asset/extention/AuthCheck'
+import { CheckLoginStatus } from '../asset/extention/AuthCheck'
 
 export default function Navbar() {
   const router = useRouter()

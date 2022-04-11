@@ -6,6 +6,7 @@ import axios from "axios";
 import styles from "../../styles/User.module.css";
 import Link from "next/link";
 import City from '../../asset/extention/tw_city'
+import Cookies from 'js-cookie'
 import { CheckLoginStatus, SetCookie, getCookie } from '../../asset/extention/AuthCheck'
 
 export default function UserInfo() {
@@ -35,11 +36,13 @@ export default function UserInfo() {
     useEffect(() => {
 
         let Check = CheckLoginStatus(router);
+        console.log('Check', Check);
         if (!Check) {
-            CheckLoginStatus('/user/login')
+            // CheckLoginStatus()
+            router.push('/')
         }
-        let userId = getCookie('userId')
-        let token = getCookie('token')
+        let userId = Cookies.get('userId')
+        let token = Cookies.get('token')
         setCityArrray(Object.keys(City))
         setUserId((value) => value = userId)
         setToken((value) => value = token)
@@ -113,9 +116,10 @@ export default function UserInfo() {
     }
 
     const Logout = () => {
-        SetCookie('userId', '', -1)
-        SetCookie('token', '', -1)
-        router.push('/')
+        Cookies.remove('userId')
+        Cookies.remove('token')
+        // router.push('/')
+        location.href = '/'
     }
 
     const UpdateUserInfo = async () => {
@@ -163,7 +167,7 @@ export default function UserInfo() {
             alert('會員密碼更新成功')
             setShowRenewParssword(false)
             GetUserInfo()
-        }else{
+        } else {
             alert('密碼更新失敗')
         }
     }

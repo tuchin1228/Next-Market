@@ -1,14 +1,15 @@
+import Cookies from 'js-cookie'
 
-export function CheckLoginStatus(router){ //未登入->login 登入->會員頁面
+export function CheckLoginStatus(){ //未登入->login 登入->會員頁面
     console.log(document.cookie);
-    let userId = getCookie('userId')
-    let token = getCookie('token')
+    let userId = Cookies.get('userId')
+    let token =  Cookies.get('token')
     console.log('userId', userId, 'token', token);
     if (userId && token) {
         return true;
     } else {
-        SetCookie('userId', '', -1)
-        SetCookie('token', '', -1)
+        Cookies.remove('userId')
+        Cookies.remove('token')
         return false;
         //   router.push('/user/login')
     }
