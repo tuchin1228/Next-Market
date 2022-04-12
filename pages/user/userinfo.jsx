@@ -35,12 +35,16 @@ export default function UserInfo() {
     // const []
     useEffect(() => {
 
-        let Check = CheckLoginStatus(router);
-        console.log('Check', Check);
-        if (!Check) {
-            // CheckLoginStatus()
-            router.push('/')
-        }
+
+        const AuthCheck = async () => {
+            let Check = await CheckLoginStatus()
+            if (!Check) {
+                // alert('轉址')
+                router.push('/')
+            }
+        };
+
+        AuthCheck()
         let userId = Cookies.get('userId')
         let token = Cookies.get('token')
         setCityArrray(Object.keys(City))

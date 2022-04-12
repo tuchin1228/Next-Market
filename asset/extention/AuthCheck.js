@@ -1,18 +1,30 @@
+import axios from 'axios';
 import Cookies from 'js-cookie'
 
-export function CheckLoginStatus(){ //未登入->login 登入->會員頁面
+export async function CheckLoginStatus(){ //未登入->login 登入->會員頁面
     console.log(document.cookie);
     let userId = Cookies.get('userId')
     let token =  Cookies.get('token')
     console.log('userId', userId, 'token', token);
-    if (userId && token) {
-        return true;
-    } else {
-        Cookies.remove('userId')
-        Cookies.remove('token')
+    let res = await axios.post(`${process.env.API_URL}/User/checkAuth`,{
+        userId,token
+    }).catch(err=>{
         return false;
-        //   router.push('/user/login')
+    })
+    console.log(res);
+    if(res.data.success){
+        return true;
+    }else{
+        return false;
     }
+    // if (userId && token) {
+    //     return true;
+    // } else {
+    //     Cookies.remove('userId')
+    //     Cookies.remove('token')
+    //     return false;
+    //     //   router.push('/user/login')
+    // }
 }
 
 export function getCookie(cname){

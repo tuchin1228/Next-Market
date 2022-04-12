@@ -15,7 +15,7 @@ import Cookies from 'js-cookie'
 
 
 export default function index({ product, productAddition, productDetail, productImages }) {
-  
+
   const router = useRouter()
   console.log('product', product);
   console.log('productAddition', productAddition);
@@ -109,7 +109,8 @@ export default function index({ product, productAddition, productDetail, product
 
   //加到購物車
   const AddToCart = async () => {
-    let Check = CheckLoginStatus(router);
+    // let Check = CheckLoginStatus(router);
+    let Check = await CheckLoginStatus()
     if (!Check) {
       alert('請先登入會員')
       router.push('/user/login')
@@ -129,7 +130,7 @@ export default function index({ product, productAddition, productDetail, product
       let tempProductAddition = [...ProductAddition];
       tempProductAddition.forEach(item => item.tempCount = 0)
       setProductAddition(tempProductAddition)
-    }else{
+    } else {
       alert(res.data.msg)
     }
   }

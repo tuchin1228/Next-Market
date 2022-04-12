@@ -35,11 +35,16 @@ export default function Login({ showLogin, ToggleShowLogin }) {
 
     // 檢查網址有無code
     useEffect(() => {
-        let Check = CheckLoginStatus(router);
-        if (Check) {
-            // alert('轉址')
-            router.push('/')
-        }
+        
+        const AuthCheck = async () => {
+            let Check = await CheckLoginStatus()
+            if (Check) {
+                // alert('轉址')
+                router.push('/')
+            }
+        };
+
+        AuthCheck()
 
         console.log(router.query);
         if (router.query && router.query.code) {

@@ -3,25 +3,62 @@ import { useRouter } from 'next/router'
 import Image from "next/image";
 import Link from "next/link";
 import Login from "./Login";
+import Cart from "./Cart";
 import Logo from "../asset/image/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart, faClipboardList, faUser } from '@fortawesome/free-solid-svg-icons'
 import { CheckLoginStatus } from '../asset/extention/AuthCheck'
+import Cookies from 'js-cookie'
 
 export default function Navbar() {
   const router = useRouter()
   const [LoginStatus, setLoginStatus] = useState(false);
+  const [showCart, setShowCart] = useState(false)
 
   useEffect(() => {
 
-    let Check = CheckLoginStatus(router);
-    if (!Check) {
-      setLoginStatus(false)
-    } else {
-      setLoginStatus(true)
-    }
+    // const AuthCheck = async () => {
+    //   let Check = await CheckLoginStatus()
+    //   // console.log('Check', Check);
+    //   if (!Check) {
+    //     setLoginStatus(false)
+    //   } else {
+    //     setLoginStatus(true)
+    //   }
+    // };
+
+    // AuthCheck()
+
+    // let Check = AuthCheck();
+    // console.log('Check', Check);
+
+
+
 
   }, [])
+
+  const UserUrl = async () => {
+    let Check = await CheckLoginStatus()
+    if (Check) {
+      router.push('/user/userinfo')
+    } else {
+      router.push('/user/login')
+
+    }
+
+  }
+
+  const ToggleCart = async () => {
+    // 檢查登入狀態
+
+    let Check = await CheckLoginStatus()
+    if (Check) {
+      // alert('轉址')
+      // router.push('/')
+    }
+
+    setShowCart(!showCart)
+  }
   // const ToggleShowLogin = (status) => {
   //   setShowLogin(status)
   // }
@@ -97,7 +134,7 @@ export default function Navbar() {
           </div>
           <div>
             <ul className="flex items-center justify-end relative">
-              <li className="text-lg  py-1 px-3 text-gray-700 relative">
+              <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => ToggleCart()}>
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faShoppingCart} /></p>
               </li>
               <li className="text-lg  py-1 px-3 text-gray-700 relative">
@@ -109,8 +146,8 @@ export default function Navbar() {
                 </Link>
               </li> */}
               {/* <li onClick={() => CheckLoginStatus()} className="text-lg  py-1 px-3 text-gray-700 relative"> */}
-              <li className="text-lg  py-1 px-3 text-gray-700 relative">
-                {
+              <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => UserUrl()}>
+                {/* {
                   LoginStatus ? (
                     <Link href={'/user/userinfo'}>
                       <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
@@ -120,10 +157,13 @@ export default function Navbar() {
                       <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
                     </Link>
                   )
-                }
+                } */}
+
                 {/* <Link href={'/user/login'}>
                   <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
                 </Link> */}
+                <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
+
               </li>
               {/* <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => ToggleShowLogin(true)}>
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
@@ -134,7 +174,9 @@ export default function Navbar() {
       </div>
 
       {/* <Login showLogin={showLogin} ToggleShowLogin={ToggleShowLogin} /> */}
-
+      {
+        showCart ? (<><Cart /></>) : ''
+      }
     </>
   );
 }
