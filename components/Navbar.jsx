@@ -51,13 +51,17 @@ export default function Navbar() {
   const ToggleCart = async () => {
     // 檢查登入狀態
 
-    let Check = await CheckLoginStatus()
-    if (Check) {
-      // alert('轉址')
-      // router.push('/')
+    if (!showCart) {
+      let Check = await CheckLoginStatus()
+      if (!Check) {
+        alert('請先登入會員')
+        router.push('/user/login')
+      } else {
+        setShowCart(!showCart)
+      }
+    } else {
+      setShowCart(!showCart)
     }
-
-    setShowCart(!showCart)
   }
   // const ToggleShowLogin = (status) => {
   //   setShowLogin(status)
@@ -175,7 +179,7 @@ export default function Navbar() {
 
       {/* <Login showLogin={showLogin} ToggleShowLogin={ToggleShowLogin} /> */}
       {
-        showCart ? (<><Cart /></>) : ''
+        showCart ? (<><Cart ToggleCart={() => ToggleCart()} /></>) : ''
       }
     </>
   );

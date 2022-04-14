@@ -117,7 +117,7 @@ export default function index({ product, productAddition, productDetail, product
       return null;
     }
     let userId = Cookies.get('userId')
-    let res = await axios.post(`${process.env.API_URL}/User/add_to_cart`, {
+    let res = await axios.post(`${process.env.API_URL}/Cart/add_to_cart`, {
       product: checkBoxProduct,
       productCount: tempCount,
       userId: userId,
@@ -135,6 +135,11 @@ export default function index({ product, productAddition, productDetail, product
     }
   }
 
+  // 先加購車後轉址
+  const BuyNow = async () => {
+    await AddToCart();
+    // 轉址
+  }
 
 
   return (
@@ -178,7 +183,7 @@ export default function index({ product, productAddition, productDetail, product
                         <section className={` tracking-widest flex-grow `}
                           onClick={() => setCheckBoxProduct(detail)}>
                           <h3 className='text-yellow-900 font-medium mb-1 text-md'>{detail.productDetailName}</h3>
-                          {detail.salePrice && detail.salePrice < detail.originPrice ? (
+                          {detail.salePrice && Math.round(detail.salePrice) < Math.round(detail.originPrice) ? (
                             <h4 className='tracking-widest text-red-500 text-md'><span className='text-sm text-gray-400' style={{ textDecoration: 'line-through' }}>原價：NTD ${Math.round(detail.originPrice)}</span>　優惠價：NTD ${Math.round(detail.salePrice)}</h4>
                           ) : (
                             <h4 className='tracking-widest text-gray-700 text-md'>售　價：NTD ${Math.round(detail.originPrice)}</h4>
@@ -203,7 +208,7 @@ export default function index({ product, productAddition, productDetail, product
 
 
             {
-              ProductAddition ?
+              ProductAddition && ProductAddition.length > 0 ?
                 <div className='mt-6'>
                   <h2 className='bg-yellow-900 text-white text-xl py-1 px-2'>限時加價購</h2>
                   {
@@ -229,7 +234,7 @@ export default function index({ product, productAddition, productDetail, product
 
             <div>
               <button type='button' onClick={() => AddToCart()} className='bg-yellow-500 hover:bg-yellow-400 text-white py-3 px-5 my-3 mr-6 text-xl tracking-widest'>加入購物車</button>
-              <button type='button' className='bg-yellow-900 hover:bg-yellow-800 text-white py-3 px-5 my-3 mr-6 text-xl tracking-widest'>立即購買</button>
+              <button type='button' onClick={() => BuyNow()} className='bg-yellow-900 hover:bg-yellow-800 text-white py-3 px-5 my-3 mr-6 text-xl tracking-widest'>立即購買</button>
             </div>
 
 

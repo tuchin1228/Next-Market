@@ -51,7 +51,7 @@ export default function about_detail({ about }) {
                         about && about.length > 0 ?
                             about.map(item => (
                                 item.about_id == aboutId ?
-                                    <>
+                                    <div key={item.about_id}>
                                         <img className="w-full mx-auto "
                                             src={process.env.Image_URL +
                                                 "/HomeAbout/" +
@@ -60,7 +60,7 @@ export default function about_detail({ about }) {
                                                 item.filename} alt="" />
 
                                         <div className='editorInner py-10' dangerouslySetInnerHTML={{ __html: item.content }}></div>
-                                    </>
+                                    </div>
                                     : null
                             ))
                             : <div></div>
