@@ -362,9 +362,9 @@ export default function checkout() {
 
                             <div className='mt-10'>
                                 <h3 className='py-2 text-3xl font-bold text-yellow-900 border-b border-gray-200'>收件人資訊</h3>
-                                <div className="form-check">
-                                    <input checked={consistent} onChange={() => setConsistent(!consistent)} className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="checkbox" value="" id="flexCheckDefault" />
-                                    <label className="form-check-label inline-block text-gray-800" htmlFor="flexCheckDefault">
+                                <div className="form-check my-2">
+                                    <input checked={consistent} onChange={() => setConsistent(!consistent)} className="w-4" type="checkbox" value="" id="flexCheckDefault" />
+                                    <label className="form-check-label inline-block text-gray-800 ml-1 text-lg " htmlFor="flexCheckDefault">
                                         同購買人資料
                                     </label>
                                 </div>

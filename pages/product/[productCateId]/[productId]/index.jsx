@@ -139,6 +139,7 @@ export default function index({ product, productAddition, productDetail, product
   const BuyNow = async () => {
     await AddToCart();
     // 轉址
+    router.push('/cart/checkout')
   }
 
 
