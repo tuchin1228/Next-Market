@@ -4,6 +4,7 @@ import { faTimesCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { CheckLoginStatus } from '../asset/extention/AuthCheck'
 import styles from "../styles/Cart.module.css";
 import axios from 'axios'
+import Link from "next/link";
 import Cookies from 'js-cookie'
 export default function Cart({ ToggleCart }) {
 
@@ -112,7 +113,9 @@ export default function Cart({ ToggleCart }) {
                                     <img className='' style={{ width: '80px' }} src={process.env.Image_URL + "/product/" + product.productId + "/product/" + product.filename} alt="" />
                                 </div>
                                 <div className='w-full ml-6'>
-                                    <h3 className='text-xl  font-medium   text-yellow-900 tracking-widest my-1'>{product.productDetailName}</h3>
+                                    <Link href={`/product/${product.productCateId}/${product.productId}`}>
+                                        <a className='text-xl  font-medium   text-yellow-900 tracking-widest my-1'>{product.productDetailName}</a>
+                                    </Link>
                                     <h2 className='text-base font-light text-gray-400 tracking-widest my-1'>{product.productName}</h2>
                                     <p>NT$ {product.salePrice && product.salePrice < product.originPrice ? Math.round(product.salePrice) : Math.round(product.originPrice)}</p>
                                     {
@@ -123,7 +126,7 @@ export default function Cart({ ToggleCart }) {
                                         <p className='text-lg px-5 border-2'>{product.count}</p>
                                         {/* <input type="number" name="" id="" className={`${styles.CartCountInput} text-lg text-yellow-900 border-2 border-yellow-900`} /> */}
                                         <button type='button' onClick={() => SetProductCount('add', product)} disabled={product.count == product.max_quantity} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white disabled:bg-gray-400`}>+</button>
-                                        <FontAwesomeIcon icon={faTrashAlt} onClick={() => RemoveProduct(product)} className="text-3xl text-red-500 hover:text-red-400 mx-2" />
+                                        <FontAwesomeIcon icon={faTrashAlt} onClick={() => RemoveProduct(product)} className="text-3xl text-gray-400 hover:text-gray-300 mx-2" />
                                     </div>
                                 </div>
 
@@ -155,7 +158,7 @@ export default function Cart({ ToggleCart }) {
                                                         <p className='text-lg px-5 border-2'>{addition.count}</p>
                                                         {/* <input type="number" name="" id="" className={`${styles.CartCountInput} text-lg text-yellow-900 border-2 border-yellow-900`} /> */}
                                                         <button type='button' onClick={() => SetAdditionCount('add', addition)} disabled={addition.count == addition.max_quantity} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white disabled:bg-gray-400 `}>+</button>
-                                                        <FontAwesomeIcon icon={faTrashAlt} onClick={() => RemoveProduct(addition)} className="text-3xl text-red-500 hover:text-red-400 mx-2" />
+                                                        <FontAwesomeIcon icon={faTrashAlt} onClick={() => RemoveProduct(addition)} className="text-3xl text-gray-400 hover:text-gray-300 mx-2" />
 
                                                     </div>
                                                 </div>
@@ -183,7 +186,9 @@ export default function Cart({ ToggleCart }) {
                 ) : (
                     <div className=' grid grid-cols-2 gap-1 p-2 border-t border-gray-200'>
                         <button type='button' className='text-center py-2 text-white text-xl rounded-md bg-yellow-900 hover:bg-yellow-800' onClick={() => ToggleCart()}>繼續購買</button>
-                        <button type='button' className='text-center py-2 text-white text-xl rounded-md bg-red-500 hover:bg-red-400'>結　　帳</button>
+                        <Link href={`/cart/checkout`}>
+                            <a className='text-center py-2 text-white text-xl rounded-md bg-red-500 hover:bg-red-400'>結　　帳</a>
+                        </Link>
                     </div >
                 )
             }
