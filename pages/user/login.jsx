@@ -14,7 +14,7 @@ import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
 
 export default function Login({ showLogin, ToggleShowLogin }) {
     const router = useRouter()
-    console.log(`${process.env.BASE_URL}${router.pathname}`);
+    console.log(`${process.env.BASE_URL} ${router.pathname}`);
 
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
@@ -28,7 +28,8 @@ export default function Login({ showLogin, ToggleShowLogin }) {
 
     // Line Need
     const [client_id, setClient_id] = useState('1657025850')
-    const [redirect_uri, setRedirect_uri] = useState(`${process.env.BASE_URL}${router.pathname}`)
+    // const [redirect_uri, setRedirect_uri] = useState(`${process.env.BASE_URL}${router.pathname}`)
+    const [redirect_uri, setRedirect_uri] = useState(`${process.env.BASE_URL}/user/lineloginload`)
     const [client_secret, setClient_secret] = useState('43767fd63709e07c151db2fcfca23822')
     const [access_token, setAccess_token] = useState('')
     const [id_token, setId_token] = useState('')
@@ -109,19 +110,12 @@ export default function Login({ showLogin, ToggleShowLogin }) {
 
     const Login = async (type, sub = null) => {
         let res = null;
-        switch (type) {
-            case 'line':
-                res = await axios.post(`${process.env.API_URL}/User/login`, {
-                    LineSub: sub
-                })
-                break;
-            case 'normal':
-                res = await axios.post(`${process.env.API_URL}/User/login`, {
-                    phone: phone,
-                    password: password
-                })
-                break;
-        }
+
+        res = await axios.post(`${process.env.API_URL}/User/login`, {
+            phone: phone,
+            password: password
+        })
+
 
         console.log(res);
         if (res.data.success) {

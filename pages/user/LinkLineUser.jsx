@@ -34,7 +34,7 @@ export default function LinkLineUser() {
         console.log(res);
         if (res.data.success) {
             alert('綁定成功')
-            router.push('/')
+            router.push('/user/login')
         } else if (res.data.errorStauts == 1) {
             alert('此帳號已綁定')
         } else if (res.data.errorStauts == 2) {

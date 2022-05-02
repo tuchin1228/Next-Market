@@ -34,7 +34,7 @@ export default function index() {
         // } else {
         //     setSub((linesub) => linesub = sub)
         // }
-        if (!sub) { //沒有帶LineSub就轉址
+        if (sub) { //沒有帶LineSub就轉址
             setSub((linesub) => linesub = sub)
         }
     }, [])
