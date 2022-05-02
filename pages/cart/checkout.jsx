@@ -14,7 +14,7 @@ import Cookies from 'js-cookie'
 import City from '../../asset/extention/tw_city'
 
 export default function checkout() {
-
+    const router = useRouter()
     const [consistent, setConsistent] = useState(false)
     const [PayName, setPayName] = useState('')
     const [PayPhone, setPayPhone] = useState('')
@@ -35,6 +35,15 @@ export default function checkout() {
     const [ReceiveAreaArrray, setReceiveAreaArrray] = useState([])
 
     useEffect(() => {
+        const AuthCheck = async () => {
+            let Check = await CheckLoginStatus()
+            if (!Check) {
+                router.push('/')
+            }
+        };
+
+        AuthCheck()
+
         setPaysetCityName(Object.keys(City)[0])
         setReceiveCityName(Object.keys(City)[0])
         GetCartData()
@@ -154,11 +163,11 @@ export default function checkout() {
             !PayCityName ||
             !PayAreaName ||
             !PayAddress ||
-            ReceiveName ||
-            ReceivePhone ||
-            ReceiveAddress ||
-            ReceiveCityName ||
-            ReceiveAreaName)) {
+            !ReceiveName ||
+            !ReceivePhone ||
+            !ReceiveAddress ||
+            !ReceiveCityName ||
+            !ReceiveAreaName)) {
             alert('資料填寫不完全!')
             return null;
         }
@@ -182,8 +191,8 @@ export default function checkout() {
         console.log(res);
         console.log('送出');
         if (res.data.success) {
-            alert('訂單成功送出，請於指定時間前繳費完成。')
-
+            alert('訂單成功送出，請前往繳費程序。')
+            router.push(`/order/pay/${res.data.orderId}`)
         }
     }
 
@@ -231,7 +240,7 @@ export default function checkout() {
                             <div className='border-b border-gray-300' key={product.productDetailId}>
 
 
-                                <div className='my-2  py-3  grid grid-cols-6 items-center ' >
+                                <div className='my-2  pt-3  grid grid-cols-6 items-center ' >
                                     <div className='flex items-start col-span-2'>
                                         <p className='self-stretch flex items-center text-lg font-medium mr-1 p-2 text-white bg-yellow-900 '>{idx + 1}</p>
                                         <img className='' style={{ width: '80px' }} src={process.env.Image_URL + "/product/" + product.productId + "/product/" + product.filename} alt="" />
@@ -248,8 +257,8 @@ export default function checkout() {
                                     {/* <div className='w-full ml-6'> */}
                                     {/* <div className="grid grid-cols-4 items-center"> */}
 
-                                    <p className=' text-center text-xl text-yellow-900 font-bold  mt-2'>$ {product.salePrice && product.salePrice < product.originPrice ? Math.round(product.salePrice) : Math.round(product.originPrice)}</p>
-                                    <p className=' text-center text-xl text-yellow-900 font-bold  mt-2'>$ {product.salePrice && product.salePrice < product.originPrice ? Math.round(product.salePrice * product.count) : Math.round(product.originPrice * product.count)}</p>
+                                    <p className=' text-center text-xl text-yellow-900 font-bold  mt-2'>$ {product.salePrice ? Math.round(product.salePrice) : Math.round(product.originPrice )}</p>
+                                    <p className=' text-center text-xl text-yellow-900 font-bold  mt-2'>$ {product.salePrice ? Math.round(product.salePrice * product.count) : Math.round(product.originPrice * product.count)}</p>
                                     <div className='w-full flex justify-center items-center '>
                                         <button type='button' onClick={() => SetProductCount('minus', product)} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white`}>-</button>
                                         <p className='text-lg px-5 border-2'>{product.count}</p>
@@ -266,14 +275,14 @@ export default function checkout() {
 
                                 </div>
                                 {
-                                    cartProductAddition.map((addition, idx) => (
+                                    cartProductAddition.map((addition, addtionidx) => (
                                         addition.productDetailId == product.productDetailId ? (
-                                            <div key={addition.productAdditionId}>
+                                            <div key={addition.productAdditionId} className="pb-3">
                                                 <h2 className='text-xl  bg-yellow-400 text-white p-1'>加購品</h2>
                                                 <div className={` py-1 grid grid-cols-6 items-center  ${addition.delete_at || (new Date().getTime() > new Date(addition.endTime).getTime()) ? 'bg-gray-100' : ''}`} >
 
                                                     <div className='flex items-start col-span-2'>
-                                                        <p className='self-stretch flex items-center text-lg font-medium mr-1 p-2 text-white bg-yellow-400 '>{idx + 1}</p>
+                                                        {/* <p className='self-stretch flex items-center text-lg font-medium mr-1 p-2 text-white bg-yellow-400 '>{addtionidx + 1}</p> */}
                                                         <img className='' style={{ width: '80px' }} src={process.env.Image_URL + "/additional_product/" + addition.productAdditionId + "/" + addition.imageFilename} alt="" />
                                                         <div className='ml-2'>
                                                             <h3 className={`text-xl  font-medium   text-yellow-900 tracking-widest  `}>{addition.productAdditionName}</h3>
@@ -330,7 +339,7 @@ export default function checkout() {
                                 <h3 className='py-2 text-3xl font-bold text-yellow-900 border-b border-gray-200'>購買人資訊</h3>
                                 <div className='my-5'>
                                     <label htmlFor="" className=' block my-1 text-lg text-yellow-900'>購買人*</label>
-                                    <input type="text" name="" id="" onChange={(e) => setPayName(e.target.value)} className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='輸入行動電話' />
+                                    <input type="text" name="" id="" onChange={(e) => setPayName(e.target.value)} className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='購買人' />
                                 </div>
                                 <div className='my-5'>
                                     <label htmlFor="" className=' block my-1 text-lg text-yellow-900'>行動電話*</label>
@@ -363,18 +372,18 @@ export default function checkout() {
                             <div className='mt-10'>
                                 <h3 className='py-2 text-3xl font-bold text-yellow-900 border-b border-gray-200'>收件人資訊</h3>
                                 <div className="form-check my-2">
-                                    <input checked={consistent} onChange={() => setConsistent(!consistent)} className="w-4" type="checkbox" value="" id="flexCheckDefault" />
+                                    <input checked={consistent} onChange={() => setConsistent(!consistent)} className="w-4" type="checkbox" autoComplete="off" value="" id="flexCheckDefault" />
                                     <label className="form-check-label inline-block text-gray-800 ml-1 text-lg " htmlFor="flexCheckDefault">
                                         同購買人資料
                                     </label>
                                 </div>
                                 <div className='my-5'>
                                     <label htmlFor="" className=' block my-1 text-lg text-yellow-900'>收件人*</label>
-                                    <input type="text" name="" id="" disabled={consistent} onChange={(e) => setReceiveName(e.target.value)} className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='輸入行動電話' />
+                                    <input type="text" name="" id="" disabled={consistent} onChange={(e) => setReceiveName(e.target.value)} autoComplete="off" className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='收件人' />
                                 </div>
                                 <div className='my-5'>
                                     <label htmlFor="" className=' block my-1 text-lg text-yellow-900'>行動電話*</label>
-                                    <input type="tel" name="" id="" disabled={consistent} onChange={(e) => setReceivePhone(e.target.value)} className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='輸入行動電話' />
+                                    <input type="tel" name="" id="" disabled={consistent} onChange={(e) => setReceivePhone(e.target.value)} autoComplete="off" className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='輸入行動電話' />
                                 </div>
                                 <div className="flex my-5">
                                     <section className=' mr-1 flex-grow'>
@@ -395,7 +404,7 @@ export default function checkout() {
                                     </section>
                                     <section className='  flex-grow'>
                                         <label htmlFor="address" className='block text-xl p-1 my-1 text-yellow-900 font-light' onChange={(e) => ReceiveAddress()} value={ReceiveAddress}>地址*</label>
-                                        <input type="text" disabled={consistent} id="" name="" value={ReceiveAddress} onChange={(e) => setReceiveAddress(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
+                                        <input type="text" disabled={consistent} id="" name="" value={ReceiveAddress} autoComplete="off" onChange={(e) => setReceiveAddress(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
                                     </section>
                                 </div>
                             </div>

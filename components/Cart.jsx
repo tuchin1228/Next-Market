@@ -110,9 +110,11 @@ export default function Cart({ ToggleCart }) {
                             <div className='my-2  py-3  flex items-start' >
                                 <div className='flex '>
                                     <p className='flex items-center text-lg font-medium mr-1 p-2 text-white bg-yellow-900 '>{idx + 1}</p>
-                                    <img className='' style={{ width: '80px' }} src={process.env.Image_URL + "/product/" + product.productId + "/product/" + product.filename} alt="" />
+                                    <div className="" style={{ width: '80px' }}>
+                                        <img className='w-full'  src={process.env.Image_URL + "/product/" + product.productId + "/product/" + product.filename} alt="" />
+                                    </div>
                                 </div>
-                                <div className='w-full ml-6'>
+                                <div className='w-full ml-2'>
                                     <Link href={`/product/${product.productCateId}/${product.productId}`}>
                                         <a className='text-xl  font-medium   text-yellow-900 tracking-widest my-1'>{product.productDetailName}</a>
                                     </Link>

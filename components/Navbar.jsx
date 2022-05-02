@@ -63,6 +63,17 @@ export default function Navbar() {
       setShowCart(!showCart)
     }
   }
+
+  const GoOrder = async () => {
+    let Check = await CheckLoginStatus()
+    if (Check) {
+      router.push('/order')
+    } else {
+      router.push('/user/login')
+
+    }
+
+  }
   // const ToggleShowLogin = (status) => {
   //   setShowLogin(status)
   // }
@@ -141,7 +152,7 @@ export default function Navbar() {
               <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => ToggleCart()}>
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faShoppingCart} /></p>
               </li>
-              <li className="text-lg  py-1 px-3 text-gray-700 relative">
+              <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => GoOrder()}>
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faClipboardList} /></p>
               </li>
               {/* <li className="text-lg  py-1 px-3 text-gray-700 relative">
