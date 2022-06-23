@@ -10,7 +10,8 @@ export default function footer() {
                     <Image src={Logo} alt="Logo" />
                 </div>
             </div>
-            <div className="flex justify-center my-5">
+            <p className='text-center mt-5 text-xl text-yellow-900'>本站為網站技術練習作品，所有商品、文案與資料皆為測試。</p>
+            {/* <div className="flex justify-center my-5">
                 <div className=' px-12 border-yellow-800 border-l border-r'>
                     <ul>
                         <li className='text-xl mb-3 font-light text-yellow-800'>關於我們</li>
@@ -43,7 +44,7 @@ export default function footer() {
                         <li>3</li>
                     </ul>
                 </div>
-            </div>
+            </div> */}
         </footer>
     )
 }
