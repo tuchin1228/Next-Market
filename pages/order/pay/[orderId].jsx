@@ -66,7 +66,43 @@ export default function index() {
         if (res.data.returnCode == '0000') {
             // 成功送出
             location.href = res.data.info.paymentUrl.web
-        }
+        }else if (res.data.returnCode == '1133') {
+            alert('付款失敗,非有效之條碼')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1110') {
+            alert('付款失敗,無法使用的信用卡')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1142') {
+            alert('付款失敗,餘額不足')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1183') {
+            alert('付款失敗,付款金額必須大於 0')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1281') {
+            alert('付款失敗,信用卡付款錯誤')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1282') {
+            alert('付款失敗,信用卡授權錯誤')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1283') {
+            alert('付款失敗,因疑似詐騙，拒絕付款')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1289') {
+            alert('付款失敗,超過信用卡付款金額上限')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1291') {
+            alert('付款失敗,此信用卡已被掛失')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1292') {
+            alert('付款失敗,此信用卡已被停卡')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '1295') {
+            alert('付款失敗,信用卡號無效')
+            vm.LockSubmitOrder = false;
+          } else if (res.data.returnCode == '9000') {
+            alert('付款失敗,LinePay內部錯誤')
+            vm.LockSubmitOrder = false;
+          } 
     }
 
     return (
