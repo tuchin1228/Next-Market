@@ -59,7 +59,7 @@ export default function index() {
     return (
         <>
             <Navbar />
-            <article className='min-h-screen mt-24 relative px-2'>
+            <article className='min-h-screen mt-20 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
                 <h2 className='text-3xl my-16 text-center font-light tracking-widest text-yellow-900'>聯　絡　我　們<br /><span className='text-lg'>Contact Us</span></h2>
 

@@ -148,7 +148,7 @@ export default function index({ product, productAddition, productDetail, product
 
       <Navbar />
 
-      <article className='min-h-screen mt-24 relative py-10  max-w-7xl mx-auto '>
+      <article className='min-h-screen mt-20 relative py-10  max-w-7xl mx-auto '>
         <section className="md:grid grid-cols-2 px-2">
           <div className='md:p-5 lg:p-10'>
             <ProductDetailCatousel productImages={productImages} />

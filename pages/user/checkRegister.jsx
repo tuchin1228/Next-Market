@@ -36,7 +36,7 @@ export default function checkRegister() {
     return (
         <>
             <Navbar />
-            <article className='min-h-screen mt-24 relative'>
+            <article className='min-h-screen mt-20 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
                 <div className={` py-10 max-w-4xl mx-auto gap-2 grid grid-cols-2 `} >
                     <h2 className='text-center text-4xl font-bold col-span-2 '>是否擁有本站會員?</h2>

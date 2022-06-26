@@ -92,7 +92,7 @@ export default function index() {
         <>
             <Navbar />
 
-            <article className='min-h-screen mt-24 relative  px-2'>
+            <article className='min-h-screen mt-20 relative  px-2'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
 
                 <form action="" className="  py-10 max-w-5xl mx-auto gap-2">

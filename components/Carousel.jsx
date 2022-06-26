@@ -38,7 +38,7 @@ export default function Carousel() {
     autoplay: true,
   };
   return (
-    <div className="relative mt-24 -mb-2 z-10 overflow-x-hidden">
+    <div className="relative mt-20 -mb-2 z-10 overflow-x-hidden">
       {WindowWidth > 768 ? (
         // 桌機版
         <Slider {...settings}>

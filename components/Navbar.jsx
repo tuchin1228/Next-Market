@@ -6,14 +6,16 @@ import Login from "./Login";
 import Cart from "./Cart";
 import Logo from "../asset/image/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShoppingCart, faClipboardList, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faClipboardList, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 import { CheckLoginStatus } from '../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
+import styles from "../styles/Navbar.module.css";
 
 export default function Navbar() {
   const router = useRouter()
   const [LoginStatus, setLoginStatus] = useState(false);
   const [showCart, setShowCart] = useState(false)
+  const [NavActive, setNavActive] = useState(false)
 
   useEffect(() => {
 
@@ -108,46 +110,73 @@ export default function Navbar() {
   //   return "";
   // }
 
+  const ToggleBar = () => {
+    setNavActive(!NavActive)
+  }
+
 
   return (
     <>
       <div className=" bg-white shadow fixed top-0 w-full left-0 z-50 ">
-        <div className="container  py-5 mx-auto flex items-center justify-between">
-          <Link href={'/'}>
-            <a className="mt-2" style={{ maxWidth: '200px' }}>
-              <Image src={Logo} alt="Logo" />
-              {/* <img src="" alt="" /> */}
-            </a>
-          </Link>
-          <div>
+        <div className="relative container lg:py-5 mx-auto flex items-center justify-between">
+          <div className=" bg-white py-4 px-4 w-full lg:w-auto flex justify-between items-center z-20">
+            <Link href={'/'}>
+              <a className="max-w-150 md:max-w-200">
+                <Image src={Logo} alt="Logo" />
+                {/* <img src="" alt="" /> */}
+              </a>
+            </Link>
+            <div className={`${NavActive ? styles.navActive : ''} lg:hidden`}>
+              <a href="javascript:;" onClick={() => ToggleBar()} className={`${styles.nav__trigger}  `} >
+                <span className={`${styles.nav__icon}  nav__icon bg-yellow-900`} ></span>
+              </a>
+            </div>
+            {/* <FontAwesomeIcon className="text-2xl text-yellow-900 block lg:hidden" style={{ }} icon={faBars} /> */}
+          </div>
+          <div className={`absolute bottom-0 left-0 transform translate-y-full bg-white lg:bg-transparent lg:transform-none  transition-all duration-150 w-full lg:relative lg:w-auto lg:block z-10 ${ NavActive ? '' : 'translate-y-0'}`}>
             {/* <ul className="flex items-center justify-end">
               <li className="text-lg  py-1 px-3 text-gray-700">購物車</li>
               <li className="text-lg  py-1 px-3 text-gray-700">訂單查詢</li>
             </ul> */}
-            <ul className="flex items-center mt-1">
-              <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
+            <ul className=" text-center lg:flex items-center mt-1">
+              <li className="font-light text-lg my-2 lg:my-0 py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
                 <Link href={'/about'}>
-                  <a>品牌故事</a>
+                  <a className="block w-full">品牌故事</a>
                 </Link>
               </li>
-              <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
+              <li className="font-light text-lg my-2 lg:my-0 py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
                 <Link href={'/news'}>
-                  <a>最新消息</a>
+                  <a className="block w-full">最新消息</a>
                 </Link>
               </li>
-              <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
+              <li className="font-light text-lg my-2 lg:my-0 py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
                 <Link href={'/product'}>
-                  <a>產品介紹</a>
+                  <a className="block w-full">產品介紹</a>
                 </Link>
               </li>
-              <li className="font-light text-lg py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
+              <li className="font-light text-lg my-2 lg:my-0 py-1 mx-2 px-5 transition-all duration-200 text-gray-600 hover:text-orange-800 rounded-full hover:bg-orange-100">
                 <Link href={'/contact'}>
-                  <a>聯絡我們</a>
+                  <a className="block w-full">聯絡我們</a>
                 </Link>
+              </li>
+
+              {/* lg up hidden */}
+              <li className="lg:hidden">
+                <ul className="flex items-center justify-center relative my-4  ">
+                  <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => ToggleCart()}>
+                    <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faShoppingCart} /></p>
+                  </li>
+                  <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => GoOrder()}>
+                    <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faClipboardList} /></p>
+                  </li>
+                  <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => UserUrl()}>
+                    <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>
-          <div>
+          <div className="hidden lg:block">
             <ul className="flex items-center justify-end relative">
               <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => ToggleCart()}>
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faShoppingCart} /></p>
@@ -155,34 +184,9 @@ export default function Navbar() {
               <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => GoOrder()}>
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faClipboardList} /></p>
               </li>
-              {/* <li className="text-lg  py-1 px-3 text-gray-700 relative">
-                <Link href={'/login'}>
-                  <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
-                </Link>
-              </li> */}
-              {/* <li onClick={() => CheckLoginStatus()} className="text-lg  py-1 px-3 text-gray-700 relative"> */}
               <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => UserUrl()}>
-                {/* {
-                  LoginStatus ? (
-                    <Link href={'/user/userinfo'}>
-                      <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
-                    </Link>
-                  ) : (
-                    <Link href={'/user/login'}>
-                      <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
-                    </Link>
-                  )
-                } */}
-
-                {/* <Link href={'/user/login'}>
-                  <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
-                </Link> */}
                 <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
-
               </li>
-              {/* <li className="text-lg  py-1 px-3 text-gray-700 relative" onClick={() => ToggleShowLogin(true)}>
-                <p className="text-lg rounded-full  bg-orange-50 text-yellow-800 hover:bg-orange-100 hover:shadow-lg hover:shadow-gray-100 transition-all duration-200" style={{ width: '45px', height: '45px' }}><FontAwesomeIcon style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }} icon={faUser} /></p>
-              </li> */}
             </ul>
           </div>
         </div>
