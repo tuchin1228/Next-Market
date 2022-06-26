@@ -46,9 +46,9 @@ export default function Home({ news, about }) {
                 "linear-gradient(0deg, #ffe8b5 0%, #fff 48%, #ffe8b5 100%)"
             } : {}}>
               <div className="w-11/12 md:max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center ">
-                <div className={idx % 2 == 0 ? 'order-2 md:order-1 px-5 md:px-10' : 'order-2 md:order-2 px-5 md:px-10'} >
-                  <h2 className="leading-relaxed my-8 text-center text-3xl font-bold tracking-widest text-yellow-900 " >{item.subtitle}</h2>
-                  <p className="text-justify  text-lg tracking-widest leading-relaxed text-gray-600  ">{item.intro}</p>
+                <div className={idx % 2 == 0 ? 'order-2 md:order-1 px-5 md:px-5 lg:px-10' : 'order-2 md:order-2 px-5 md:px-5 lg:px-10'} >
+                  <h2 className="leading-relaxed my-8 text-center text-2xl lg:text-3xl font-bold tracking-widest text-yellow-900 " >{item.subtitle}</h2>
+                  <p className="text-justify text-md md:text-lg tracking-widest leading-relaxed text-gray-600  ">{item.intro}</p>
                   <div className="text-center my-10">
                     <a href="" className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-yellow-900 hover:bg-yellow-800 text-white ">{item.linkName}</a>
                   </div>
@@ -88,7 +88,7 @@ export default function Home({ news, about }) {
         {/* <section className="shap1"></section> */}
 
 
-        <div className="news container mx-auto z-10 relative text-gray-900">
+        <div className="news container mx-auto z-10 relative text-gray-900 px-3 md:px-10">
           <div className="flex items-center justify-between">
             <h2 className="text-4xl font-medium tracking-wider leading-8 ">
               最新消息
@@ -104,7 +104,7 @@ export default function Home({ news, about }) {
                   className="mx-auto  relative shadow-lg rounded-xl bg-white"
                   style={{ width: "90%", maxWidth: "450px" }}
                 >
-                  <h3 className="w-fit px-2 py-1 rounded text-white text-2xl bg-yellow-900 absolute top-0 left-0  z-20 transform -translate-x-1/4 -translate-y-1/3 ">
+                  <h3 className="w-fit px-2 py-1 rounded text-white text-xl lg:text-2xl bg-yellow-900 absolute top-0 left-0  z-20 transform -translate-x-1/4 -translate-y-1/3 ">
                     {item.articles_cate_title}
                   </h3>
                   <Link href={`/news/${item.cateId}/${item.article_id}`}>
@@ -122,7 +122,7 @@ export default function Home({ news, about }) {
                   </Link>
                   <div className="  relative  mx-auto  py-2 px-5 bg-white rounded-b-lg">
                     <Link href={`/news/${item.cateId}/${item.article_id}`}>
-                      <a className="text-2xl font-medium tracking-wide text-yellow-900 hover:text-yellow-700">
+                      <a className="text-xl lg:text-2xl font-medium tracking-wide text-yellow-900 hover:text-yellow-700">
                         {item.title}
                       </a>
                     </Link>
@@ -144,8 +144,8 @@ export default function Home({ news, about }) {
         <section className="shap2 -z-10"></section>
       </div>
 
-      <div className="map container mx-auto py-20 relative px-5 md:px-0">
-        <iframe className="w-full px-5 xl:px-0 rounded-xl shadow-xl" height="550" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5207.690671044539!2d120.30941981093964!3d22.63911691892543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e04f4871d07a7%3A0xccb9296f1ea5e649!2z6auY6ZuE6LuK56uZ!5e0!3m2!1szh-TW!2stw!4v1647443660085!5m2!1szh-TW!2stw" allowFullScreen loading="lazy"></iframe>
+      <div className="map container mx-auto py-20 relative px-5 ">
+        <iframe className="w-full rounded-xl shadow-xl" height="550" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5207.690671044539!2d120.30941981093964!3d22.63911691892543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x346e04f4871d07a7%3A0xccb9296f1ea5e649!2z6auY6ZuE6LuK56uZ!5e0!3m2!1szh-TW!2stw!4v1647443660085!5m2!1szh-TW!2stw" allowFullScreen loading="lazy"></iframe>
         <div className="w-full  mx-auto my-5 lg:my-0 card  py-5 px-5 xl:px-10 bg-white shadow-xl rounded-lg lg:absolute top-1/2 right-0 transform-none lg:transform lg:-translate-x-5 xl:translate-x-1/3 -translate-y-1/2 lg:max-w-xs xl:max-w-md" >
           <h2 className="text-4xl font-bold pb-6 border-b border-gray-200">位置訊息</h2>
           <p className="font-light py-6 lg:text-md xl:text-xl tracking-wider leading-relaxed text-gray-900 ">歡迎透過聯絡表單或專線我們聯繫<br />將有專人盡速為您服務。</p>

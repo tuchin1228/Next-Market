@@ -222,10 +222,10 @@ export default function checkout() {
 
             <Navbar />
 
-            <article className='min-h-screen my-32 rounded-xl relative p-10   max-w-7xl mx-auto bg-white'>
+            <article className='min-h-screen my-32 rounded-xl relative px-5 md:p-10  max-w-7xl mx-auto bg-white'>
 
                 <h2 className='text-4xl text-yellow-900 tracking-wider font-bold border-b border-gray-200 py-3'>購物車</h2>
-                <div className="grid grid-cols-6">
+                <div className="hidden md:grid grid-cols-6">
                     <p className='bg-yellow-900 text-white py-1 text-lg text-center col-span-2'>品名</p>
                     <p className='bg-yellow-900 text-white py-1 text-lg text-center '>單價</p>
                     <p className='bg-yellow-900 text-white py-1 text-lg text-center '>小計</p>
@@ -240,15 +240,15 @@ export default function checkout() {
                             <div className='border-b border-gray-300' key={product.productDetailId}>
 
 
-                                <div className='my-2  pt-3  grid grid-cols-6 items-center ' >
+                                <div className='my-2  pt-3  md:grid grid-cols-6 items-center ' >
                                     <div className='flex items-start col-span-2'>
                                         <p className='self-stretch flex items-center text-lg font-medium mr-1 p-2 text-white bg-yellow-900 '>{idx + 1}</p>
                                         <img className='' style={{ width: '80px' }} src={process.env.Image_URL + "/product/" + product.productId + "/product/" + product.filename} alt="" />
                                         <div className='ml-2'>
                                             <Link href={`/product/${product.productCateId}/${product.productId}`}>
-                                                <a className='text-xl  font-medium   text-yellow-900 tracking-widest my-1'>{product.productDetailName}</a>
+                                                <a className='text-lg lg:text-xl  font-medium   text-yellow-900 tracking-widest my-1'>{product.productDetailName}</a>
                                             </Link>
-                                            <h2 className='text-base font-light text-gray-400 tracking-widest'>{product.productName}</h2>
+                                            <h2 className='text-sm lg:text-base font-light text-gray-400 tracking-widest'>{product.productName}</h2>
                                             {
                                                 product.count == product.max_quantity ? <p className='text-red-500'>(已達購買限制量)</p> : null
                                             }
@@ -257,17 +257,42 @@ export default function checkout() {
                                     {/* <div className='w-full ml-6'> */}
                                     {/* <div className="grid grid-cols-4 items-center"> */}
 
-                                    <p className=' text-center text-xl text-yellow-900 font-bold  mt-2'>$ {product.salePrice ? Math.round(product.salePrice) : Math.round(product.originPrice )}</p>
-                                    <p className=' text-center text-xl text-yellow-900 font-bold  mt-2'>$ {product.salePrice ? Math.round(product.salePrice * product.count) : Math.round(product.originPrice * product.count)}</p>
-                                    <div className='w-full flex justify-center items-center '>
+                                    {/* md up */}
+                                    <p className=' text-center text-xl text-yellow-900 font-bold  mt-2  hidden md:block'>$ {product.salePrice ? Math.round(product.salePrice) : Math.round(product.originPrice)}</p>
+                                    <p className=' text-center text-xl text-yellow-900 font-bold  mt-2  hidden md:block'>$ {product.salePrice ? Math.round(product.salePrice * product.count) : Math.round(product.originPrice * product.count)}</p>
+
+                                    {/* md down */}
+                                    <div className="grid grid-cols-2 md:hidden my-2 border border-orange-200">
+                                        <div>
+                                            <h2 className="text-center bg-orange-200 text-yellow-800">單價</h2>
+                                            <p className="text-center">$ {product.salePrice ? Math.round(product.salePrice) : Math.round(product.originPrice)}</p>
+                                        </div>
+                                        <div>
+                                            <h2 className="text-center bg-orange-200 text-yellow-800">小計</h2>
+                                            <p className="text-center">$ {product.salePrice ? Math.round(product.salePrice * product.count) : Math.round(product.originPrice * product.count)}</p>
+                                        </div>
+                                    </div>
+
+                                    {/* md up */}
+                                    <div className='w-full justify-center items-center hidden md:flex'>
                                         <button type='button' onClick={() => SetProductCount('minus', product)} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white`}>-</button>
                                         <p className='text-lg px-5 border-2'>{product.count}</p>
-                                        {/* <input type="number" name="" id="" className={`${styles.CartCountInput} text-lg text-yellow-900 border-2 border-yellow-900`} /> */}
                                         <button type='button' onClick={() => SetProductCount('add', product)} disabled={product.count == product.max_quantity} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white disabled:bg-gray-400`}>+</button>
-
                                     </div>
-                                    <div className="text-center">
+                                    <div className="text-center hidden md:block">
                                         <FontAwesomeIcon icon={faTrashAlt} onClick={() => RemoveProduct(product)} className="text-3xl text-gray-400 hover:text-gray-300 mx-2" />
+                                    </div>
+
+                                    {/* md down */}
+                                    <div className='flex justify-end items-center md:hidden'>
+                                        <div className='flex justify-center items-center '>
+                                            <button type='button' onClick={() => SetProductCount('minus', product)} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white`}>-</button>
+                                            <p className='text-lg px-5 border-2'>{product.count}</p>
+                                            <button type='button' onClick={() => SetProductCount('add', product)} disabled={product.count == product.max_quantity} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white disabled:bg-gray-400`}>+</button>
+                                        </div>
+                                        <div className="text-center">
+                                            <FontAwesomeIcon icon={faTrashAlt} onClick={() => RemoveProduct(product)} className="text-3xl text-gray-400 hover:text-gray-300 mx-2" />
+                                        </div>
                                     </div>
                                     {/* </div> */}
 
@@ -279,13 +304,13 @@ export default function checkout() {
                                         addition.productDetailId == product.productDetailId ? (
                                             <div key={addition.productAdditionId} className="pb-3">
                                                 <h2 className='text-xl  bg-yellow-400 text-white p-1'>加購品</h2>
-                                                <div className={` py-1 grid grid-cols-6 items-center  ${addition.delete_at || (new Date().getTime() > new Date(addition.endTime).getTime()) ? 'bg-gray-100' : ''}`} >
+                                                <div className={` py-1 md:grid grid-cols-6 items-center  ${addition.delete_at || (new Date().getTime() > new Date(addition.endTime).getTime()) ? 'bg-gray-100' : ''}`} >
 
                                                     <div className='flex items-start col-span-2'>
                                                         {/* <p className='self-stretch flex items-center text-lg font-medium mr-1 p-2 text-white bg-yellow-400 '>{addtionidx + 1}</p> */}
                                                         <img className='' style={{ width: '80px' }} src={process.env.Image_URL + "/additional_product/" + addition.productAdditionId + "/" + addition.imageFilename} alt="" />
                                                         <div className='ml-2'>
-                                                            <h3 className={`text-xl  font-medium   text-yellow-900 tracking-widest  `}>{addition.productAdditionName}</h3>
+                                                            <h3 className={`text-lg lg:text-xl  font-medium   text-yellow-900 tracking-widest  `}>{addition.productAdditionName}</h3>
                                                             {
                                                                 addition.count == addition.max_quantity
                                                                     && !addition.delete_at
@@ -297,19 +322,47 @@ export default function checkout() {
                                                         </div>
                                                     </div>
 
-                                                    <p className='text-center text-xl text-yellow-900 font-bold'>$ {addition.forAll ? Math.round(addition.forAllPrice) : Math.round(addition.addition_price)}</p>
-                                                    <p className='text-center text-xl text-yellow-900 font-bold'>$ {addition.forAll ? Math.round(addition.forAllPrice * addition.count) : Math.round(addition.addition_price * addition.count)}</p>
-                                                    <div className='w-full flex justify-center '>
+                                                    {/* md up */}
+                                                    <p className='text-center text-xl text-yellow-900 font-bold hidden md:block'>$ {addition.forAll ? Math.round(addition.forAllPrice) : Math.round(addition.addition_price)}</p>
+                                                    <p className='text-center text-xl text-yellow-900 font-bold hidden md:block'>$ {addition.forAll ? Math.round(addition.forAllPrice * addition.count) : Math.round(addition.addition_price * addition.count)}</p>
+                                                    <div className='w-full  justify-center hidden md:flex'>
                                                         <button type='button' onClick={() => SetAdditionCount('minus', addition)} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white`}>-</button>
                                                         <p className='text-lg px-5 border-2'>{addition.count}</p>
                                                         {/* <input type="number" name="" id="" className={`${styles.CartCountInput} text-lg text-yellow-900 border-2 border-yellow-900`} /> */}
                                                         <button type='button' onClick={() => SetAdditionCount('add', addition)} disabled={addition.count == addition.max_quantity} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white disabled:bg-gray-400 `}>+</button>
 
                                                     </div>
-                                                    <div className='text-center'>
+                                                    <div className='text-center hidden md:block'>
                                                         <FontAwesomeIcon icon={faTrashAlt} onClick={() => RemoveProduct(addition)} className="text-3xl text-gray-400 hover:text-gray-300 mx-2" />
-
                                                     </div>
+
+
+                                                    {/* md down */}
+                                                    <div className="grid grid-cols-2 md:hidden my-2 border border-orange-200">
+                                                        <div>
+                                                            <h2 className="text-center bg-orange-200 text-yellow-800">單價</h2>
+                                                            <p className="text-center">$ {addition.forAll ? Math.round(addition.forAllPrice) : Math.round(addition.addition_price)}</p>
+                                                        </div>
+                                                        <div>
+                                                            <h2 className="text-center bg-orange-200 text-yellow-800">小計</h2>
+                                                            <p className="text-center">$ {addition.forAll ? Math.round(addition.forAllPrice * addition.count) : Math.round(addition.addition_price * addition.count)}</p>
+                                                        </div>
+                                                    </div>
+                                                    {/* md down */}
+                                                    <div className='flex justify-end items-center md:hidden'>
+                                                        <div className='flex justify-center items-center'>
+                                                            <button type='button' onClick={() => SetAdditionCount('minus', addition)} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white`}>-</button>
+                                                            <p className='text-lg px-5 border-2'>{addition.count}</p>
+                                                            {/* <input type="number" name="" id="" className={`${styles.CartCountInput} text-lg text-yellow-900 border-2 border-yellow-900`} /> */}
+                                                            <button type='button' onClick={() => SetAdditionCount('add', addition)} disabled={addition.count == addition.max_quantity} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white disabled:bg-gray-400 `}>+</button>
+
+                                                        </div>
+                                                        <div className='text-center hidden md:block'>
+                                                            <FontAwesomeIcon icon={faTrashAlt} onClick={() => RemoveProduct(addition)} className="text-3xl text-gray-400 hover:text-gray-300 mx-2" />
+
+                                                        </div>
+                                                    </div>
+
                                                 </div>
 
 
@@ -345,7 +398,7 @@ export default function checkout() {
                                     <label htmlFor="" className=' block my-1 text-lg text-yellow-900'>行動電話*</label>
                                     <input type="tel" name="" id="" onChange={(e) => setPayPhone(e.target.value)} className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='輸入行動電話' />
                                 </div>
-                                <div className="flex my-5">
+                                <div className="flex my-5 flex-wrap md:flex-nowrap">
                                     <section className=' mr-1 flex-grow'>
                                         <label htmlFor="" className='block text-xl p-1 my-1 text-yellow-900 font-light'>縣市*</label>
                                         <select name="" id="" onChange={(e) => setPaysetCityName(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' >
@@ -385,7 +438,7 @@ export default function checkout() {
                                     <label htmlFor="" className=' block my-1 text-lg text-yellow-900'>行動電話*</label>
                                     <input type="tel" name="" id="" disabled={consistent} onChange={(e) => setReceivePhone(e.target.value)} autoComplete="off" className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='輸入行動電話' />
                                 </div>
-                                <div className="flex my-5">
+                                <div className="flex my-5 flex-wrap md:flex-nowrap">
                                     <section className=' mr-1 flex-grow'>
                                         <label htmlFor="" className='block text-xl p-1 my-1 text-yellow-900 font-light'>縣市*</label>
                                         <select name="" id="" disabled={consistent} onChange={(e) => setReceiveCityName(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' >

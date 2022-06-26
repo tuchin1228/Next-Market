@@ -110,7 +110,7 @@ export default function index() {
 
             <Navbar />
 
-            <article className='min-h-screen my-32 rounded-xl relative p-10   max-w-7xl mx-auto bg-white'>
+            <article className='min-h-screen my-32 rounded-xl relative py-10 p-3 md:p-10   max-w-7xl mx-auto bg-white'>
                 <h2 className='text-4xl text-yellow-900 tracking-wider font-bold border-b border-gray-200 py-3'>訂單內容</h2>
 
 

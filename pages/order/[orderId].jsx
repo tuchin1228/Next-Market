@@ -58,16 +58,16 @@ export default function orderId() {
     const RenderPayStatus = (payStatus) => {
         switch (payStatus) {
             case 0:
-                return <p className='text-xl font-medium text-gray-400'>尚未付款</p>
+                return <p className='text-lg md:text-xl font-medium text-gray-400'>尚未付款</p>
                 break;
             case 1:
-                return <><p className='text-xl font-medium text-yellow-900'>付款成功</p><p className='text-lg text-gray-400'>{order.pay_at}</p></>
+                return <><p className='text-lg md:text-xl font-medium text-yellow-900'>付款成功</p><p className='text-sm md:text-lg text-gray-400'>{order.pay_at}</p></>
                 break;
             case 2:
-                return <><p className='text-xl font-medium text-yellow-900'>取消申請中</p><p className='text-lg text-gray-400'>{order.cancel_at}</p></>
+                return <><p className='text-lg md:text-xl font-medium text-yellow-900'>取消申請中</p><p className='text-sm md:text-lg text-gray-400'>{order.cancel_at}</p></>
                 break;
             case 3:
-                return <><p className='text-xl font-medium text-yellow-900'>已取消</p><p className='text-lg text-gray-400'>{order.cancel_at}</p></>
+                return <><p className='text-lg md:text-xl font-medium text-yellow-900'>已取消</p><p className='text-sm md:text-lg text-gray-400'>{order.cancel_at}</p></>
                 break;
             default:
                 break;
@@ -79,22 +79,22 @@ export default function orderId() {
 
             <Navbar />
 
-            <article className='min-h-screen my-32 rounded-xl relative p-10   max-w-7xl mx-auto '>
+            <article className='min-h-screen my-32 rounded-xl relative px-5 py-10 md:p-10   max-w-7xl mx-auto '>
                 <section className='' key={order.orderId}>
                     <h3 className='bg-yellow-900 px-2  py-2  text-lg tracking-wider text-white flex justify-between orders-center'>
                         <span>單號：{order.orderId}</span>
                     </h3>
                 </section>
-                <div className="bg-white p-10">
-                    <section className='flex justify-around py-10'>
+                <div className="bg-white p-3 md:p-10">
+                    <section className='grid grid-cols-3 py-10'>
                         <div className=" text-center  px-3 my-3">
                             <div className='relative'>
                                 <FontAwesomeIcon icon={faClipboardList} className="text-5xl  text-green-500" />
                                 <div className="bg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 border-4 rounded-full border-green-500"></div>
                             </div>
                             <div className='mt-8'>
-                                <p className='text-xl font-medium text-yellow-900'>訂單成立</p>
-                                <p className=' text-gray-400'>{order.created_at}</p>
+                                <p className='text-lg md:text-xl font-medium text-yellow-900'>訂單成立</p>
+                                <p className='text-sm md:text-lg text-gray-400'>{order.created_at}</p>
                             </div>
                         </div>
                         <div className=" text-center  px-3 my-3">

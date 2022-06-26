@@ -116,14 +116,14 @@ export default function Cart({ ToggleCart }) {
                                 </div>
                                 <div className='w-full ml-2'>
                                     <Link href={`/product/${product.productCateId}/${product.productId}`}>
-                                        <a className='text-xl  font-medium   text-yellow-900 tracking-widest my-1'>{product.productDetailName}</a>
+                                        <a className='text-base md:text-xl  font-medium   text-yellow-900 tracking-widest my-1'>{product.productDetailName}</a>
                                     </Link>
-                                    <h2 className='text-base font-light text-gray-400 tracking-widest my-1'>{product.productName}</h2>
+                                    <h2 className='text-sm md:text-base font-light text-gray-400 tracking-widest my-1'>{product.productName}</h2>
                                     <p>NT$ {product.salePrice && product.salePrice < product.originPrice ? Math.round(product.salePrice) : Math.round(product.originPrice)}</p>
                                     {
                                         product.count == product.max_quantity ? <p className='text-red-500'>(已達購買限制量)</p> : null
                                     }
-                                    <div className='w-full flex justify-end items-center '>
+                                    <div className='w-full flex justify-end items-center mt-6 md:mt-0'>
                                         <button type='button' onClick={() => SetProductCount('minus', product)} className={`${styles.CartCountBtn} text-xl bg-yellow-900 hover:bg-yellow-800 text-white`}>-</button>
                                         <p className='text-lg px-5 border-2'>{product.count}</p>
                                         {/* <input type="number" name="" id="" className={`${styles.CartCountInput} text-lg text-yellow-900 border-2 border-yellow-900`} /> */}
@@ -137,19 +137,19 @@ export default function Cart({ ToggleCart }) {
                                 cartProductAddition.map((addition, idx) => (
                                     addition.productDetailId == product.productDetailId ? (
                                         <div key={addition.productAdditionId}>
-                                            {idx == 0 ? <h2 className='text-xl ml-6 bg-yellow-400 text-white p-1'>加購品</h2> : null}
-                                            <div className={`pl-6 py-1  flex items-start ${addition.delete_at || (new Date().getTime() > new Date(addition.endTime).getTime()) ? 'bg-gray-100' : ''}`} >
+                                            {idx == 0 ? <h2 className='text-xl md:ml-6 bg-yellow-400 text-white p-1'>加購品</h2> : null}
+                                            <div className={`md:pl-6 py-1  flex items-start ${addition.delete_at || (new Date().getTime() > new Date(addition.endTime).getTime()) ? 'bg-gray-100' : ''}`} >
                                                 <div className='flex '>
                                                     <p className='flex items-center text-lg font-medium mr-1 p-2 text-white bg-yellow-400 '>{idx + 1}</p>
                                                     <img className='' style={{ width: '80px' }} src={process.env.Image_URL + "/additional_product/" + addition.productAdditionId + "/" + addition.imageFilename} alt="" />
                                                 </div>
-                                                <div className='w-full ml-6'>
+                                                <div className='md:w-full ml-2 md:ml-6'>
+                                                    <h3 className={`text-base md:text-xl  font-medium   text-yellow-900 tracking-widest my-1 `}>{addition.productAdditionName}</h3>
                                                     <p>NT$ {addition.forAll ? Math.round(addition.forAllPrice) : Math.round(addition.addition_price)}</p>
-                                                    <h3 className={`text-xl  font-medium   text-yellow-900 tracking-widest my-1 `}>{addition.productAdditionName}</h3>
                                                     {
                                                         addition.count == addition.max_quantity
                                                             && !addition.delete_at
-                                                            && (new Date().getTime() < new Date(addition.endTime).getTime()) ? <p className='text-red-500'>(已達加購限制量)</p> : null
+                                                            && (new Date().getTime() < new Date(addition.endTime).getTime()) ? <p className='text-base text-red-500'>(已達加購限制量)</p> : null
                                                     }
                                                     {
                                                         addition.delete_at || (new Date().getTime() > new Date(addition.endTime).getTime()) ? <p className='text-gray-500'>(已失效)</p> : null

@@ -75,16 +75,16 @@ export default function list() {
     const RenderPayStatus = (payStatus) => {
         switch (payStatus) {
             case 0:
-                return <span className='text-yellow-300 font-medium'>待付款</span>
+                return <span className='text-yellow-300 font-medium  ml-auto mr-0'>待付款</span>
                 break;
             case 1:
-                return <span className='text-yellow-300 font-medium'>完成</span>
+                return <span className='text-yellow-300 font-medium  ml-auto mr-0'>完成</span>
                 break;
             case 2:
-                return <span className='text-yellow-300 font-medium'>取消審核中</span>
+                return <span className='text-yellow-300 font-medium  ml-auto mr-0'>取消審核中</span>
                 break;
             case 3:
-                return <span className='text-yellow-300 font-medium'>已取消</span>
+                return <span className='text-yellow-300 font-medium  ml-auto mr-0'>已取消</span>
                 break;
             default:
                 break;
@@ -94,10 +94,10 @@ export default function list() {
 
         switch (item.payStatus) {
             case 0:
-                return <button onClick={() => ConfirmCancelDialog(item.orderId, item.payStatus)} type='button' className='ml-1 transition-all duration-150 px-2 py-1 text-lg tracking-wider text-gray-400 border border-gray-400 hover:bg-gray-400 hover:text-white'>取消訂單</button>
+                return <button onClick={() => ConfirmCancelDialog(item.orderId, item.payStatus)} type='button' className='w-full md:w-auto text-center my-1 ml-1 transition-all duration-150 px-2 py-1 text-lg tracking-wider text-gray-400 border border-gray-400 hover:bg-gray-400 hover:text-white'>取消訂單</button>
                 break;
             case 1:
-                return <button onClick={() => ConfirmCancelDialog(item.orderId, item.payStatus)} type='button' className='ml-1 transition-all duration-150 px-2 py-1 text-lg tracking-wider text-gray-400 border border-gray-400 hover:bg-gray-400 hover:text-white'>申請取消</button>
+                return <button onClick={() => ConfirmCancelDialog(item.orderId, item.payStatus)} type='button' className='w-full md:w-auto text-center my-1 ml-1 transition-all duration-150 px-2 py-1 text-lg tracking-wider text-gray-400 border border-gray-400 hover:bg-gray-400 hover:text-white'>申請取消</button>
                 break;
             default:
                 break;
@@ -114,13 +114,13 @@ export default function list() {
                 !order || order.length == 0 ? (<div className='h-screen rounded-xl relative p-10   max-w-7xl mx-auto '>
                     <h2 className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-yellow-900'>查無訂單紀錄</h2>
                 </div>) :
-                    <article className='min-h-screen my-32 rounded-xl relative p-10   max-w-7xl mx-auto '>
+                    <article className='min-h-screen my-32 rounded-xl relative px-5 py-10  md:p-10   max-w-7xl mx-auto '>
                         <div className="grid grid-cols-5">
-                            <section className={`text-center text-2xl border border-yellow-900 py-2 ${activePayStatus == 'all' ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus('all')}>全部</section>
-                            <section className={`text-center text-2xl border border-yellow-900 py-2 ${activePayStatus == 0 ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus(0)}>未付款</section>
-                            <section className={`text-center text-2xl border border-yellow-900 py-2 ${activePayStatus == 1 ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus(1)}>已付款</section>
-                            <section className={`text-center text-2xl border border-yellow-900 py-2 ${activePayStatus == 2 ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus(2)}>審核中</section>
-                            <section className={`text-center text-2xl border border-yellow-900 py-2 ${activePayStatus == 3 ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus(3)}>已取消</section>
+                            <section className={`text-center text-lg md:text-2xl border border-yellow-900 py-2 ${activePayStatus == 'all' ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus('all')}>全部</section>
+                            <section className={`text-center text-lg md:text-2xl border border-yellow-900 py-2 ${activePayStatus == 0 ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus(0)}>未付款</section>
+                            <section className={`text-center text-lg md:text-2xl border border-yellow-900 py-2 ${activePayStatus == 1 ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus(1)}>已付款</section>
+                            <section className={`text-center text-lg md:text-2xl border border-yellow-900 py-2 ${activePayStatus == 2 ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus(2)}>審核中</section>
+                            <section className={`text-center text-lg md:text-2xl border border-yellow-900 py-2 ${activePayStatus == 3 ? 'text-white bg-yellow-900' : 'text-yellow-900 bg-transparent'} `} onClick={() => setActivePayStatus(3)}>已取消</section>
                         </div>
                         {
                             order.map(item => (
@@ -128,7 +128,7 @@ export default function list() {
                                     {
                                         item.payStatus == activePayStatus || activePayStatus == 'all' ? (
                                             <div className='my-10' key={item.orderId}>
-                                                <h3 className='bg-yellow-900 px-2  py-2  text-lg tracking-wider text-white flex justify-between items-center'>
+                                                <h3 className='bg-yellow-900 px-2  py-2  text-lg tracking-wider text-white flex justify-between items-center flex-wrap md:flex-nowrap'>
                                                     <span>單號：{item.orderId}</span>
                                                     {
                                                         RenderPayStatus(item.payStatus)
@@ -148,7 +148,7 @@ export default function list() {
                                                                             <p className=' text-right text-gray-400'>NT ${detail.salePrice ? <><span className='line-through'>{Math.round(detail.originPrice)}</span>　<span className='text-xl text-yellow-900 font-bold'>${Math.round(detail.salePrice)}</span></> : <span className='text-xl text-yellow-900 font-bold'>{Math.round(detail.originPrice)}</span>}</p>
                                                                         </div>
                                                                     </div>
-                                                                    <div className="grid grid-cols-2">
+                                                                    <div className="grid grid-cols-1 md:grid-cols-2">
                                                                         <div className='my-6 border-r'>
                                                                             <h2 className='text-center font-light text-xl text-gray-500'>訂單金額<br /><span className='text-2xl font-bold text-yellow-900'>NT ${item.Total}</span></h2>
                                                                         </div>
@@ -157,15 +157,15 @@ export default function list() {
                                                                         </div>
                                                                     </div>
 
-                                                                    <div className='flex justify-end my-2'>
+                                                                    <div className='flex justify-end my-2 flex-wrap md:flex-nowrap '>
                                                                         {
-                                                                            item.payStatus == 0 ? (<Link href={`/order/pay/${item.orderId}`} ><a className='ml-1 transition-all duration-150 px-2 py-1 text-lg tracking-wider bg-yellow-900 hover:bg-yellow-800 text-white' >立即付款</a></Link>) : null
+                                                                            item.payStatus == 0 ? (<Link href={`/order/pay/${item.orderId}`} ><a className='w-full md:w-auto text-center my-1  ml-1 transition-all duration-150 px-2 py-1 text-lg tracking-wider bg-yellow-900 hover:bg-yellow-800 text-white' >立即付款</a></Link>) : null
                                                                         }
                                                                         <Link href={`/order/${item.orderId}`} >
-                                                                            <a className='ml-1 transition-all duration-150 text-yellow-900 border border-yellow-900 px-2 py-1 text-lg tracking-wider hover:bg-yellow-900 hover:text-white'>訂單詳情</a>
+                                                                            <a className='w-full md:w-auto text-center my-1 ml-1 transition-all duration-150 text-yellow-900 border border-yellow-900 px-2 py-1 text-lg tracking-wider hover:bg-yellow-900 hover:text-white'>訂單詳情</a>
                                                                         </Link>
                                                                         <Link href={`/contact`} >
-                                                                            <a className='ml-1 transition-all duration-150 text-yellow-900 border border-yellow-900 px-2 py-1 text-lg tracking-wider hover:bg-yellow-900 hover:text-white'>聯絡我們</a>
+                                                                            <a className='w-full md:w-auto text-center my-1 ml-1 transition-all duration-150 text-yellow-900 border border-yellow-900 px-2 py-1 text-lg tracking-wider hover:bg-yellow-900 hover:text-white'>聯絡我們</a>
                                                                         </Link>
                                                                         {
                                                                             RenderCancelButton(item)

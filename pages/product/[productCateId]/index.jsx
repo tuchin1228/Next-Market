@@ -28,7 +28,7 @@ export default function index({ category, product, productImages }) {
             <Navbar />
 
 
-            <article className='min-h-screen mt-24 relative'>
+            <article className='min-h-screen mt-24 relative px-2'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center font-light tracking-widest', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
                 <section className='py-10 max-w-7xl mx-auto '>
                     <h2 className='text-3xl my-16 text-center font-light tracking-widest text-yellow-900'>產 品 介 紹<br /><span className='text-lg'>Our Products</span></h2>
@@ -49,7 +49,7 @@ export default function index({ category, product, productImages }) {
                                 )) : null
                             }
                         </section>
-                        <section className='col-span-4 md:col-span-3 grid grid-cols-3 gap-2'>
+                        <section className='col-span-4 md:col-span-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
                             {
                                 product ? product.map(item => (
                                     <div key={item.productId} className="bg-white p-3 shadow-xl">

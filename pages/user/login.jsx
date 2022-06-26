@@ -207,7 +207,7 @@ export default function Login({ showLogin, ToggleShowLogin }) {
         <>
             <Navbar />
 
-            <article className='min-h-screen mt-24 relative'>
+            <article className='min-h-screen mt-24 relative px-2'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
 
                 <div className={` py-10 max-w-4xl mx-auto gap-2  `} >
@@ -253,28 +253,28 @@ export default function Login({ showLogin, ToggleShowLogin }) {
             </article>
             {
                 showRenewParssword ? (
-                    <div className="w-4/5  mx-auto z-10 my-5 lg:my-0 card  py-5 px-5 xl:px-10 bg-white shadow-xl rounded-lg fixed top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2  lg:max-w-xs xl:max-w-md" >
+                    <div className="w-11/12 md:w-4/5   mx-auto z-10 my-5 lg:my-0 card  py-5 px-5 xl:px-10 bg-white shadow-xl rounded-lg fixed top-1/2 left-1/2  transform -translate-x-1/2 -translate-y-1/2  lg:max-w-xs xl:max-w-md" >
                         <h2 className="text-4xl font-bold pb-6 border-b border-gray-200">修改密碼</h2>
-                        <section className='my-5'>
+                        <section className='my-1 md:my-5'>
                             <label htmlFor="verify_phone" className='block text-xl p-1 my-1 text-yellow-900 font-light'>認證電話</label>
                             <input type="tel" id="verify_phone" name="verify_phone" value={verify_phone} onChange={(e) => setVerify_phone(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
                         </section>
 
-                        <div className='my-5'>
+                        <div className='my-1 md:my-5'>
                             <label htmlFor="verify_email" className=' block my-1 text-lg text-yellow-900'>信箱：</label>
                             <input type="email" name="verify_email" id="verify_email" value={verify_email} onChange={(e) => setVerify_email(e.target.value)} className=' block my-1 text-lg border border-gray-200 p-2 w-full rounded-sm' placeholder='' />
                         </div>
-                        <section className='my-5'>
+                        <section className='my-1 md:my-5'>
                             <label htmlFor="newPassword" className='block text-xl p-1 my-1 text-yellow-900 font-light'>新密碼</label>
                             <input type="password" id="newPassword" name="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
                         </section>
-                        <section className='my-5'>
+                        <section className='my-1 md:my-5'>
                             <label htmlFor="ConfirmNewPassword" className='block text-xl p-1 my-1 text-yellow-900 font-light'>確認新密碼</label>
                             <input type="password" id="ConfirmNewPassword" name="ConfirmNewPassword" value={ConfirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} className='block w-full py-2 px-2 rounded-md border text-lg' required />
                         </section>
                         <div className="flex justify-around my-5">
-                            <button type="button" onClick={() => ResetPassword()} className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-red-500 hover:bg-red-400 text-white ">送出</button>
-                            <button type="button" onClick={() => setShowRenewParssword(false)} className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-gray-400 hover:bg-gray-300 text-white ">取消</button>
+                            <button type="button" onClick={() => ResetPassword()} className="py-2 px-10 md:px-14 transition-all duration-150  rounded-full text-xl bg-red-500 hover:bg-red-400 text-white ">送出</button>
+                            <button type="button" onClick={() => setShowRenewParssword(false)} className="py-2 px-10 md:px-14 transition-all duration-150  rounded-full text-xl bg-gray-400 hover:bg-gray-300 text-white ">取消</button>
                         </div>
                     </div>
                 ) : (

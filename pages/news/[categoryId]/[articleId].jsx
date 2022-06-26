@@ -38,7 +38,7 @@ export default function new_detail({ success, newsDetail }) {
         <div>
 
             <Navbar />
-            <article className='min-h-screen mt-24 relative'>
+            <article className='min-h-screen mt-24 relative px-2'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
 
 

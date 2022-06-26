@@ -180,7 +180,7 @@ export default function UserInfo() {
         <>
             <Navbar />
 
-            <article className='min-h-screen mt-24 relative'>
+            <article className='min-h-screen mt-24 relative px-2'>
 
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>
                 <h2 className='text-3xl my-16 text-center font-light tracking-widest text-yellow-900'>會　員　資　訊<br /><span className='text-lg'>User Infomation</span></h2>

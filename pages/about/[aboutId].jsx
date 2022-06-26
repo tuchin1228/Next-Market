@@ -35,16 +35,16 @@ export default function about_detail({ about }) {
                 <h2 className='text-3xl my-16 text-center font-light tracking-widest text-yellow-900'>關　於　我　們<br /><span className='text-lg'>Contact Us</span></h2>
 
                 <div className="category">
-                    <div className=' flex justify-center items-center my-16'>
+                    <div className=' flex   flex-wrap md:flex-nowrap  justify-center items-center my-16'>
                         {
                             about.map((item, idx) => {
-                                return <Link href={`/about/${item.about_id}`} key={item.about_id}><a className={`px-12 py-2  hover:bg-yellow-900 transition-all duration-200 text-white text-lg mx-3 rounded-full tracking-widest ${item.about_id == aboutId ? 'bg-yellow-900' : 'bg-gray-300'}`}>{item.title}</a></Link>
+                                return <Link href={`/about/${item.about_id}`} key={item.about_id}><a className={`  w-4/5 md:w-auto text-center my-1 px-12 py-2  hover:bg-yellow-900 transition-all duration-200 text-white text-lg mx-3 rounded-full tracking-widest ${item.about_id == aboutId ? 'bg-yellow-900' : 'bg-gray-300'}`}>{item.title}</a></Link>
                             })
                         }
                     </div>
                 </div>
 
-                <section className='py-10 max-w-5xl mx-auto '>
+                <section className='py-10  md:max-w-2xl lg:max-w-3xl xl:max-w-5xl mx-auto px-2 '>
 
                     {
 

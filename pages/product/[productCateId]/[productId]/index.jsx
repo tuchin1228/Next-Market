@@ -149,11 +149,11 @@ export default function index({ product, productAddition, productDetail, product
       <Navbar />
 
       <article className='min-h-screen mt-24 relative py-10  max-w-7xl mx-auto '>
-        <section className="grid grid-cols-2">
-          <div className='p-10'>
+        <section className="md:grid grid-cols-2 px-2">
+          <div className='md:p-5 lg:p-10'>
             <ProductDetailCatousel productImages={productImages} />
           </div>
-          <div className='p-10 '>
+          <div className='md:p-5 lg:p-10 '>
             <section className='border-b pb-3'>
               <h2 className='text-3xl font-medium tracking-wider  text-yellow-900 pb-2 '>{product.productName}</h2>
               <p className='mt-2 text-gray-600 tracking-widest font-light text-base text-justify leading-relaxed'>{product.productIntro}</p>
@@ -246,7 +246,7 @@ export default function index({ product, productAddition, productDetail, product
 
       </article >
 
-      <article className='mb-10  max-w-7xl mx-auto'>
+      <article className='mb-10  max-w-7xl mx-auto px-2'>
         <div className='grid grid-cols-3 gap-1  '>
           <button type='button' onClick={() => ToggleTab(1)} className={`w-full text-center py-2 text-xl ${activeTab == 1 ? 'text-white bg-yellow-900 hover:bg-yellow-800 ' : 'text-yellow-900 bg-orange-100 hover:bg-yellow-900 hover:text-white'} transition-all duration-150`}>商品介紹</button>
           <button type='button' onClick={() => ToggleTab(2)} className={`w-full text-center py-2 text-xl ${activeTab == 2 ? 'text-white bg-yellow-900 hover:bg-yellow-800 ' : 'text-yellow-900 bg-orange-100 hover:bg-yellow-900 hover:text-white'} transition-all duration-150`}>商品組成</button>
