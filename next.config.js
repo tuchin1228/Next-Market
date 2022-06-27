@@ -5,9 +5,9 @@ const nextConfig = {
     // API_URL: 'http://blognode.dudu8888.site/api',
     // Image_URL: 'http://blognode.dudu8888.site/storage',
     // BASE_URL: 'http://sofa.dudu8888.site'
-    API_URL: 'http://114.35.65.114/ChocolateMarket/public/api',
-    Image_URL: 'http://114.35.65.114/ChocolateMarket/public/storage',
-    BASE_URL: 'http://114.35.65.114:3000'
+    API_URL: 'http://market.3b8.site/api',
+    Image_URL: 'http://market.3b8.site/storage',
+    BASE_URL: 'http://shop.3b8.site'
   },
   
 }
