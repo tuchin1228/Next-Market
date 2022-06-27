@@ -12,7 +12,7 @@ import Cookies from 'js-cookie'
 import { route } from 'next/dist/server/router';
 import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
 
-export default function lineloginload() {
+export default function Lineloginload() {
 
     const router = useRouter()
 

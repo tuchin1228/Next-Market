@@ -7,7 +7,7 @@ import styles from "../../styles/About.module.css";
 import Link from "next/link";
 
 
-export default function about({ about }) {
+export default function About({ about }) {
     console.log(about);
 
     return (

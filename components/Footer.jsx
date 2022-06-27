@@ -2,7 +2,7 @@ import React from 'react'
 import Image from "next/image";
 import Logo from "../asset/image/logo.png";
 
-export default function footer() {
+export default function Footer() {
     return (
         <footer className='py-16 bg-orange-100 '>
             <div className="text-center">

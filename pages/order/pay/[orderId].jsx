@@ -11,7 +11,7 @@ import { CheckLoginStatus } from '../../../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
 
 
-export default function index() {
+export default function Index() {
 
     const router = useRouter()
     const [order, setOrder] = useState([]);

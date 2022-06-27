@@ -7,7 +7,7 @@ import styles from "../../styles/Contact.module.css";
 import Link from "next/link";
 
 
-export default function index() {
+export default function Index() {
 
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')

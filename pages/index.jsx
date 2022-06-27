@@ -20,7 +20,7 @@ export async function getServerSideProps() {
 }
 
 
-export default function Home({ news, about }) {
+export default function App({ news, about }) {
 
   const FilterDate = (date) => {
     // return date;

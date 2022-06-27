@@ -7,7 +7,7 @@ import styles from "../../styles/News.module.css";
 import Link from "next/link";
 
 
-export default function news({ news, categories }) {
+export default function News({ news, categories }) {
 
 
     console.log(news);

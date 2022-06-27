@@ -9,7 +9,7 @@ import Link from "next/link";
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default function index({ category, product, productImages }) {
+export default function Index({ category, product, productImages }) {
     console.log(category);
     console.log(product);
 

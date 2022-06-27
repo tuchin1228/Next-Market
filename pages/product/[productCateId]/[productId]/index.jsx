@@ -14,7 +14,7 @@ import Cookies from 'js-cookie'
 
 
 
-export default function index({ product, productAddition, productDetail, productImages }) {
+export default function Index({ product, productAddition, productDetail, productImages }) {
 
   const router = useRouter()
   console.log('product', product);

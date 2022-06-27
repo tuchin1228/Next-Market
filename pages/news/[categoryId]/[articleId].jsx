@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from "next/link";
 
 
-export default function new_detail({ success, newsDetail }) {
+export default function New_detail({ success, newsDetail }) {
 
     const router = useRouter()
     const { categoryId } = router.query

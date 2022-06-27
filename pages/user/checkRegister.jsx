@@ -6,7 +6,7 @@ import axios from "axios";
 import styles from "../../styles/User.module.css";
 import Link from "next/link";
 
-export default function checkRegister() {
+export default function CheckRegister() {
     const router = useRouter()
     const [sub, setSub] = useState('')
     useEffect(() => {

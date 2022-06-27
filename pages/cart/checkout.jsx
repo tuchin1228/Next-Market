@@ -13,7 +13,7 @@ import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
 import City from '../../asset/extention/tw_city'
 
-export default function checkout() {
+export default function Checkout() {
     const router = useRouter()
     const [consistent, setConsistent] = useState(false)
     const [PayName, setPayName] = useState('')

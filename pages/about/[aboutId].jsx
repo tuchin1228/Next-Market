@@ -8,7 +8,7 @@ import styles from "../../styles/News.module.css";
 import Link from "next/link";
 
 
-export default function about_detail({ about }) {
+export default function About_detail({ about }) {
 
 
     const router = useRouter()

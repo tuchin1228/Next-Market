@@ -12,7 +12,7 @@ import Cookies from 'js-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardList, faMoneyBillWave, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
 
-export default function orderId() {
+export default function OrderId() {
 
     const router = useRouter()
     const [order, setOrder] = useState({});

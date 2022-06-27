@@ -9,7 +9,7 @@ import styles from "../../../styles/Cart.module.css";
 import Link from "next/link";
 import { CheckLoginStatus } from '../../../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
-export default function confirm() {
+export default function Confirm() {
 
   const router = useRouter()
 

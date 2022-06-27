@@ -8,7 +8,7 @@ import Link from "next/link";
 import City from '../../asset/extention/tw_city'
 
 
-export default function index() {
+export default function Index() {
     const router = useRouter()
     console.log(City);
     const [name, setName] = useState('')

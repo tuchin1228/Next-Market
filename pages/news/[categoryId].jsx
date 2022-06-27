@@ -6,7 +6,7 @@ import axios from "axios";
 import styles from "../../styles/News.module.css";
 import Link from "next/link";
 
-export default function new_category({ news, categories }) {
+export default function New_category({ news, categories }) {
 
   const router = useRouter()
   const { categoryId } = router.query
