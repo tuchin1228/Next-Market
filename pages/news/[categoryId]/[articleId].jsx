@@ -23,7 +23,7 @@ export default function New_detail({ success, newsDetail }) {
 
     const FilterDate = (date) => {
         // return date;
-        let d = new Date(date);
+        let d = new Date(date.replace(/-/g,'/'));
         return `${d.getDate() > 9 ? d.getDate() : "0" + d.getDate()}`;
     };
 
