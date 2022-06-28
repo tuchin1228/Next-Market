@@ -29,7 +29,7 @@ export default function New_detail({ success, newsDetail }) {
 
     const FilterYearMonth = (date) => {
         // return date;
-        let d = new Date(date);
+        let d = new Date(date.replace(/-/g,'/'));
         return `${d.getFullYear()}.${d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)
             }`;
     };
