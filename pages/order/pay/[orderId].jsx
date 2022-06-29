@@ -167,7 +167,7 @@ export default function Index() {
                 <h2 className='text-4xl text-yellow-900 tracking-wider font-bold border-b border-gray-200 py-3 align-middle'>選擇付款方式</h2>
                 <div className="flex py-3 flex-grow flex-wrap">
                     <button onClick={() => pay()} type='button' className='block outline-none text-center w-full font-extrabold text-green-500 hover:bg-green-500 hover:text-white transition-all duration-150 py-1 px-2 text-3xl border-2 border-green-500 rounded-md'>LINE PAY</button>
-                    <p className='w-full my-2 text-gray-500 font-light'>目前僅使用LINE PAY串接，環境為Sandbox測試環境，並不會真實繳費，請放心登入模擬付款。</p>
+                    <p className='w-full my-2 text-gray-500 font-light'>目前僅使用LINE PAY串接，環境為Sandbox測試環境，並不會真實繳費，請放心登入模擬付款。（避免使用無痕模式進行付款動作，LinePay Session會無法讀取導致付款失敗）</p>
 
                 </div>
                 {/* {
