@@ -54,7 +54,7 @@ export default function App({ news, about }) {
                   <h2 className="leading-relaxed my-8 text-center text-2xl lg:text-3xl font-bold tracking-widest text-yellow-900 " >{item.subtitle}</h2>
                   <p className="text-justify text-md md:text-lg tracking-widest leading-relaxed text-gray-600  ">{item.intro}</p>
                   <div className="text-center my-10">
-                    <a href="" className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-yellow-900 hover:bg-yellow-800 text-white ">{item.linkName}</a>
+                    <a href={item.link} className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-yellow-900 hover:bg-yellow-800 text-white ">{item.linkName}</a>
                   </div>
                 </div>
                 <div className={idx % 2 == 0 ? 'order-1 md:order-2' : 'order-1 md:order-1'}>
@@ -164,8 +164,9 @@ export default function App({ news, about }) {
             </div>
           </div>
           <div className="text-center my-5">
-
-            <button type="button" className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-yellow-900 hover:bg-yellow-800 text-white ">聯絡我們</button>
+            <Link href={`/contact`}>
+              <a className="py-2 px-14 transition-all duration-150  rounded-full text-xl bg-yellow-900 hover:bg-yellow-800 text-white ">聯絡我們</a>
+            </Link>
           </div>
         </div>
       </div>
