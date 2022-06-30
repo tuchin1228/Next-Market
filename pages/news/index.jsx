@@ -5,6 +5,7 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import styles from "../../styles/News.module.css";
 import Link from "next/link";
+import Head from "next/head";
 
 
 export default function News({ news, categories }) {
@@ -22,6 +23,10 @@ export default function News({ news, categories }) {
 
     return (
         <div>
+            <Head>
+                <title>最新消息 - 巧克力工廠</title>
+            </Head>
+
             <Navbar />
 
             <article className='min-h-screen mt-20 relative'>

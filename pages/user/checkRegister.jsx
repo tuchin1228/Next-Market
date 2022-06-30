@@ -5,13 +5,14 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import styles from "../../styles/User.module.css";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function CheckRegister() {
     const router = useRouter()
     const [sub, setSub] = useState('')
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search) 
-        let sub = params.get('sub') 
+        const params = new URLSearchParams(window.location.search)
+        let sub = params.get('sub')
         if (!sub) { //沒有帶LineSub就轉址
             router.push('/user/login')
         } else {
@@ -35,6 +36,9 @@ export default function CheckRegister() {
 
     return (
         <>
+            <Head>
+                <title>會員綁定 - 巧克力工廠</title>
+            </Head>
             <Navbar />
             <article className='min-h-screen mt-20 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>

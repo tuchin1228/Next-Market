@@ -9,6 +9,8 @@ import styles from "../../../styles/Cart.module.css";
 import Link from "next/link";
 import { CheckLoginStatus } from '../../../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
+import Head from "next/head";
+
 export default function Confirm() {
 
   const router = useRouter()
@@ -45,7 +47,7 @@ export default function Confirm() {
     console.log(res);
     if (res && res.data && res.data.success) {
       router.push(`/order/${router.query.orderId}`)
-    }else{
+    } else {
       alert('付款失敗，請稍後再試。')
       router.push(`/order/pay/${router.query.orderId}`)
     }
@@ -53,6 +55,9 @@ export default function Confirm() {
 
   return (
     <div>
+      <Head>
+        <title>付款中請稍後 - 巧克力工廠</title>
+      </Head>
       <h2 className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-bold text-3xl text-orange-800'>付款中請稍後...</h2>
     </div>
   )

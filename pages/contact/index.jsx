@@ -5,6 +5,7 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import styles from "../../styles/Contact.module.css";
 import Link from "next/link";
+import Head from "next/head";
 
 
 export default function Index() {
@@ -58,6 +59,9 @@ export default function Index() {
 
     return (
         <>
+            <Head>
+                <title>聯絡我們 - 巧克力工廠</title>
+            </Head>
             <Navbar />
             <article className='min-h-screen mt-20 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>

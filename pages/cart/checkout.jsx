@@ -12,6 +12,8 @@ import { faTimesCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
 import City from '../../asset/extention/tw_city'
+import Head from "next/head";
+
 
 export default function Checkout() {
     const router = useRouter()
@@ -219,7 +221,9 @@ export default function Checkout() {
 
     return (
         <>
-
+            <Head>
+                <title>訂單確認 - 巧克力工廠</title>
+            </Head>
             <Navbar />
 
             <article className='min-h-screen my-32 rounded-xl relative px-5 md:p-10  max-w-7xl mx-auto bg-white'>

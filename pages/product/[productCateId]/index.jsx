@@ -9,6 +9,7 @@ import styles from "../../../styles/Product.module.css";
 import Link from "next/link";
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Head from "next/head";
 
 export default function Index({ category, product, productImages }) {
     console.log(category);
@@ -24,7 +25,9 @@ export default function Index({ category, product, productImages }) {
 
     return (
         <>
-
+            <Head>
+                <title>產品介紹 - 巧克力工廠</title>
+            </Head>
             <Navbar />
 
 

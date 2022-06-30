@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import styles from "../../styles/News.module.css";
 import Link from "next/link";
+import Head from "next/head";
 
 
 export default function About_detail({ about }) {
@@ -28,7 +29,9 @@ export default function About_detail({ about }) {
 
     return (
         <>
-
+            <Head>
+                <title>關於我們 - 巧克力工廠</title>
+            </Head>
             <Navbar />
             <article className='min-h-screen mt-20 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>

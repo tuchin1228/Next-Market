@@ -8,6 +8,7 @@ import Link from "next/link";
 import City from '../../asset/extention/tw_city'
 import Cookies from 'js-cookie'
 import { CheckLoginStatus, SetCookie, getCookie } from '../../asset/extention/AuthCheck'
+import Head from "next/head";
 
 export default function UserInfo() {
 
@@ -178,6 +179,9 @@ export default function UserInfo() {
 
     return (
         <>
+            <Head>
+                <title>會員資訊 - 巧克力工廠</title>
+            </Head>
             <Navbar />
 
             <article className='min-h-screen mt-20 relative'>

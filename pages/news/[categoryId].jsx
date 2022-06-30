@@ -5,6 +5,7 @@ import Footer from "../../components/Footer";
 import axios from "axios";
 import styles from "../../styles/News.module.css";
 import Link from "next/link";
+import Head from "next/head";
 
 export default function New_category({ news, categories }) {
 
@@ -25,13 +26,16 @@ export default function New_category({ news, categories }) {
 
   const FilterDate = (date) => {
     // return date;
-    let d = new Date(date.replace(/-/g,'/'));
+    let d = new Date(date.replace(/-/g, '/'));
     return `${d.getFullYear()} / ${d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)
       } / ${d.getDate() > 9 ? d.getDate() : "0" + d.getDate()}`;
   };
 
   return (
     <div>
+      <Head>
+        <title>最新消息 - 巧克力工廠</title>
+      </Head>
       <Navbar />
 
       <article className='min-h-screen mt-20 relative'>

@@ -11,6 +11,7 @@ import qs from 'qs';
 import Cookies from 'js-cookie'
 import { route } from 'next/dist/server/router';
 import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
+import Head from "next/head";
 
 export default function Login({ showLogin, ToggleShowLogin }) {
     const router = useRouter()
@@ -36,7 +37,7 @@ export default function Login({ showLogin, ToggleShowLogin }) {
 
     // 檢查網址有無code
     useEffect(() => {
-        
+
         const AuthCheck = async () => {
             let Check = await CheckLoginStatus()
             if (Check) {
@@ -205,6 +206,9 @@ export default function Login({ showLogin, ToggleShowLogin }) {
     return (
 
         <>
+            <Head>
+                <title>會員登入 - 巧克力工廠</title>
+            </Head>
             <Navbar />
 
             <article className='min-h-screen mt-20 relative'>

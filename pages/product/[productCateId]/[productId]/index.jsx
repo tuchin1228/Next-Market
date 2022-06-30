@@ -11,6 +11,7 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CheckLoginStatus } from '../../../../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
+import Head from "next/head";
 
 
 
@@ -145,7 +146,9 @@ export default function Index({ product, productAddition, productDetail, product
 
   return (
     <>
-
+      <Head>
+        <title>{product.productName} - 巧克力工廠</title>
+      </Head>
       <Navbar />
 
       <article className='min-h-screen mt-20 relative py-10  max-w-7xl mx-auto '>
@@ -179,7 +182,7 @@ export default function Index({ product, productAddition, productDetail, product
                             className={`hidden ${styles.radioBox}`}
                             onChange={() => { }}
                             checked={(checkBoxProduct && checkBoxProduct.productDetailId == detail.productDetailId)} />
-                          <label htmlFor={`detail${detail.productDetailId}`}  onClick={() => setCheckBoxProduct(detail)} className={`${styles.checkBoxLabel} `}></label>
+                          <label htmlFor={`detail${detail.productDetailId}`} onClick={() => setCheckBoxProduct(detail)} className={`${styles.checkBoxLabel} `}></label>
                         </div>
                         <section className={` tracking-widest flex-grow `}
                           onClick={() => setCheckBoxProduct(detail)}>

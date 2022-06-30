@@ -7,6 +7,7 @@ import styles from "../../../styles/News.module.css";
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Link from "next/link";
+import Head from "next/head";
 
 
 export default function New_detail({ success, newsDetail }) {
@@ -23,20 +24,22 @@ export default function New_detail({ success, newsDetail }) {
 
     const FilterDate = (date) => {
         // return date;
-        let d = new Date(date.replace(/-/g,'/'));
+        let d = new Date(date.replace(/-/g, '/'));
         return `${d.getDate() > 9 ? d.getDate() : "0" + d.getDate()}`;
     };
 
     const FilterYearMonth = (date) => {
         // return date;
-        let d = new Date(date.replace(/-/g,'/'));
+        let d = new Date(date.replace(/-/g, '/'));
         return `${d.getFullYear()}.${d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)
             }`;
     };
 
     return (
         <div>
-
+            <Head>
+                <title>{newsDetail.title} - 巧克力工廠</title>
+            </Head>
             <Navbar />
             <article className='min-h-screen mt-20 relative'>
                 <div className={"banner " + styles.bannerImage} style={{ height: '500px', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}></div>

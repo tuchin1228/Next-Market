@@ -6,6 +6,7 @@ import axios from "axios";
 import styles from "../../styles/User.module.css";
 import Link from "next/link";
 import City from '../../asset/extention/tw_city'
+import Head from "next/head";
 
 
 export default function Index() {
@@ -90,6 +91,9 @@ export default function Index() {
 
     return (
         <>
+            <Head>
+                <title>會員註冊 - 巧克力工廠</title>
+            </Head>
             <Navbar />
 
             <article className='min-h-screen mt-20 relative  px-2'>

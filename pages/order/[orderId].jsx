@@ -11,6 +11,7 @@ import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClipboardList, faMoneyBillWave, faLongArrowAltRight } from '@fortawesome/free-solid-svg-icons'
+import Head from "next/head";
 
 export default function OrderId() {
 
@@ -76,7 +77,9 @@ export default function OrderId() {
 
     return (
         <>
-
+            <Head>
+                <title>訂單詳情 - 巧克力工廠</title>
+            </Head>
             <Navbar />
 
             <article className='min-h-screen my-32 rounded-xl relative px-5 py-10 md:p-10   max-w-7xl mx-auto '>

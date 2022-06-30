@@ -9,6 +9,7 @@ import styles from "../../styles/Cart.module.css";
 import Link from "next/link";
 import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
 import Cookies from 'js-cookie'
+import Head from "next/head";
 
 
 export default function List() {
@@ -107,7 +108,9 @@ export default function List() {
 
     return (
         <>
-
+            <Head>
+                <title>訂單列表 - 巧克力工廠</title>
+            </Head>
             <Navbar />
 
             {

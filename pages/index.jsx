@@ -7,8 +7,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Carousel from "../components/Carousel";
 import axios from "axios";
-import { faMapMarkerAlt, faPhone, faStoreAlt, faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMapMarkerAlt, faPhone, faStoreAlt, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export async function getServerSideProps() {
 
@@ -24,7 +24,7 @@ export default function App({ news, about }) {
 
   const FilterDate = (date) => {
     // return date;
-    let d = new Date(date.replace(/-/g,'/'));
+    let d = new Date(date.replace(/-/g, '/'));
     return `${d.getFullYear()} / ${d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1)
       } / ${d.getDate() > 9 ? d.getDate() : "0" + d.getDate()}`;
   };
@@ -33,6 +33,10 @@ export default function App({ news, about }) {
 
   return (
     <div>
+
+      <Head>
+        <title>巧克力工廠 - 首頁</title>
+      </Head>
       <Navbar />
 
       <Carousel />

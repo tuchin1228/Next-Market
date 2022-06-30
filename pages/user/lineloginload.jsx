@@ -11,6 +11,7 @@ import qs from 'qs';
 import Cookies from 'js-cookie'
 import { route } from 'next/dist/server/router';
 import { CheckLoginStatus } from '../../asset/extention/AuthCheck'
+import Head from "next/head";
 
 export default function Lineloginload() {
 
@@ -114,6 +115,9 @@ export default function Lineloginload() {
 
     return (
         <div>
+            <Head>
+                <title>Line 登入驗證中 - 巧克力工廠</title>
+            </Head>
             <p className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl text-yellow-900 font-bold'>Line 登入驗證中 ...</p>
         </div>
     )
