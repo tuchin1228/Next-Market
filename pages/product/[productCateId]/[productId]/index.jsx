@@ -179,7 +179,7 @@ export default function Index({ product, productAddition, productDetail, product
                             className={`hidden ${styles.radioBox}`}
                             onChange={() => { }}
                             checked={(checkBoxProduct && checkBoxProduct.productDetailId == detail.productDetailId)} />
-                          <label htmlFor={`detail${detail.productDetailId}`} className={`${styles.checkBoxLabel} `}></label>
+                          <label htmlFor={`detail${detail.productDetailId}`}  onClick={() => setCheckBoxProduct(detail)} className={`${styles.checkBoxLabel} `}></label>
                         </div>
                         <section className={` tracking-widest flex-grow `}
                           onClick={() => setCheckBoxProduct(detail)}>
