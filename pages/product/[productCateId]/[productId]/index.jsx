@@ -36,8 +36,8 @@ export default function Index({ product, productAddition, productDetail, product
       item.tempCount = 0;
     })
     setProductAddition(productAddition)
-
-  }, [])
+    
+  }, [router])
 
   useEffect(() => {
     //選擇的商品更改時數量要重置
