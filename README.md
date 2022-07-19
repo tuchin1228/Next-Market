@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 巧克力電商
+![1](https://user-images.githubusercontent.com/51053467/179649523-7b770fb7-8397-4a73-9302-e78f54b60fca.png)
 
-## Getting Started
 
-First, run the development server:
+### Demo
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+<a href="<https://shop.dudu8888.site/>" target="_blank">https://shop.dudu8888.site/</a><br/>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### 網站功能介紹(前台)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+-   使用者登入、註冊、Line Login
+-   品牌介紹
+-   最新消息
+-   購物車
+-   Line Pay
+-   訂單紀錄查看
+-   聯絡表單
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+### 網站功能介紹(後台)
 
-To learn more about Next.js, take a look at the following resources:
+-   首頁輪播管理
+-   品牌介紹管理
+-   最新消息管理
+-   會員管理
+-   商品類別、商品標籤
+-   商品管理、加購品管理
+-   訂單管理
+-   聯絡表單管理
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 框架與套件(前台)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+-   Next.js
+-   js-cookie
+-   slick-carousel
+-   tailwindcss
+-   fontawesome
+-   axios
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 框架與套件(後台)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   Laravel
+-   Bootstrap 5
+
+### 畫面截圖(前台)
+
+![2](https://user-images.githubusercontent.com/51053467/179649571-d1feba2c-1870-46f9-b84b-97036304f167.png)
+![3](https://user-images.githubusercontent.com/51053467/179649606-bafc4466-3170-4d66-bf8a-5257ad8dcae2.png)
+![4](https://user-images.githubusercontent.com/51053467/179649624-9f24122e-3144-4006-97e1-fefb1ac7b3a2.png)
+![5](https://user-images.githubusercontent.com/51053467/179649641-3f80b431-973d-44fc-8fa2-3c81b2acada7.png)
+![6](https://user-images.githubusercontent.com/51053467/179649655-b7bc5db2-7810-4578-bdb3-ae0cdf7355ee.png)
+![7](https://user-images.githubusercontent.com/51053467/179649671-efb27967-8393-4b44-8c28-d4c56dc8dc35.png)
+![8](https://user-images.githubusercontent.com/51053467/179649685-179a787b-a2ed-4647-a27e-52f93e6fab52.png)
+
+### 畫面截圖(後台)
+
+![9](https://user-images.githubusercontent.com/51053467/179649711-7498c7f7-c65f-4438-95f4-0cca7ee68f3f.png)
